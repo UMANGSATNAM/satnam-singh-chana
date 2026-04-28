@@ -59,7 +59,7 @@ export default function CartPage() {
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
         <p className="text-gray-500 mb-6">Looks like you haven&apos;t added any snacks yet!</p>
         <Button
-          className="bg-amber-500 hover:bg-amber-600 text-white"
+          className="bg-emerald-600 hover:bg-emerald-700 text-white"
           onClick={() => setView('products')}
         >
           <ShoppingBag className="mr-2 h-4 w-4" />
@@ -104,7 +104,7 @@ export default function CartPage() {
                 <Card>
                   <CardContent className="p-4">
                     <div className="flex gap-4">
-                      <div className="w-20 h-20 bg-gradient-to-br from-amber-100 to-orange-100 rounded-xl flex items-center justify-center shrink-0">
+                      <div className="w-20 h-20 bg-gradient-to-br from-emerald-100 to-green-100 rounded-xl flex items-center justify-center shrink-0">
                         <span className="text-3xl">🥜</span>
                       </div>
                       <div className="flex-1 min-w-0">
@@ -178,7 +178,7 @@ export default function CartPage() {
                     variant="outline"
                     onClick={handleApplyPromo}
                     disabled={promoLoading || !promoCode.trim()}
-                    className="border-amber-300 text-amber-700 hover:bg-amber-50 shrink-0"
+                    className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 shrink-0"
                   >
                     <Tag className="h-4 w-4 mr-1" />
                     Apply
@@ -236,7 +236,7 @@ export default function CartPage() {
               )}
 
               <Button
-                className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold h-11"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-11"
                 onClick={() => setView('checkout')}
               >
                 Proceed to Checkout <ArrowRight className="ml-2 h-4 w-4" />
@@ -244,7 +244,7 @@ export default function CartPage() {
 
               <Button
                 variant="ghost"
-                className="w-full text-amber-600 hover:text-amber-700"
+                className="w-full text-emerald-600 hover:text-emerald-700"
                 onClick={() => setView('products')}
               >
                 Continue Shopping

@@ -37,7 +37,7 @@ export default function AdminBanners() {
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-amber-500 hover:bg-amber-600">
+            <Button className="bg-emerald-600 hover:bg-emerald-700">
               <Plus className="h-4 w-4 mr-2" /> {isFlashSale ? 'Create Flash Sale' : 'Add Banner'}
             </Button>
           </DialogTrigger>
@@ -93,7 +93,7 @@ export default function AdminBanners() {
                   </div>
                 </>
               )}
-              <Button className="w-full bg-amber-500 hover:bg-amber-600" onClick={() => setDialogOpen(false)}>
+              <Button className="w-full bg-emerald-600 hover:bg-emerald-700" onClick={() => setDialogOpen(false)}>
                 {isFlashSale ? 'Create Flash Sale' : 'Add Banner'}
               </Button>
             </div>

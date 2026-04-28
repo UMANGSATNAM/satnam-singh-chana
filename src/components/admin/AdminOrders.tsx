@@ -12,19 +12,19 @@ import { useState } from 'react';
 
 const statusColors: Record<string, string> = {
   placed: 'bg-gray-100 text-gray-700',
-  confirmed: 'bg-blue-100 text-blue-700',
+  confirmed: 'bg-emerald-100 text-emerald-700',
   packed: 'bg-yellow-100 text-yellow-700',
   shipped: 'bg-purple-100 text-purple-700',
   delivered: 'bg-emerald-100 text-emerald-700',
   cancelled: 'bg-red-100 text-red-700',
-  returned: 'bg-orange-100 text-orange-700',
+  returned: 'bg-green-100 text-green-700',
 };
 
 const paymentColors: Record<string, string> = {
   pending: 'bg-yellow-100 text-yellow-700',
   completed: 'bg-emerald-100 text-emerald-700',
   failed: 'bg-red-100 text-red-700',
-  refunded: 'bg-orange-100 text-orange-700',
+  refunded: 'bg-green-100 text-green-700',
 };
 
 const mockOrders = [
@@ -59,10 +59,10 @@ export default function AdminOrders() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-          <Input placeholder="Search orders..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+          <Input placeholder="Search orders..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 focus:ring-emerald-500 focus:border-emerald-500" />
         </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-40"><SelectValue placeholder="Status" /></SelectTrigger>
+          <SelectTrigger className="w-40 focus:ring-emerald-500"><SelectValue placeholder="Status" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Status</SelectItem>
             <SelectItem value="placed">Placed</SelectItem>
@@ -79,20 +79,20 @@ export default function AdminOrders() {
         <CardContent className="p-0">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>Order #</TableHead>
-                <TableHead>Customer</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Items</TableHead>
-                <TableHead>Total</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Payment</TableHead>
-                <TableHead className="w-12"></TableHead>
+              <TableRow className="bg-emerald-50">
+                <TableHead className="text-emerald-700">Order #</TableHead>
+                <TableHead className="text-emerald-700">Customer</TableHead>
+                <TableHead className="text-emerald-700">Date</TableHead>
+                <TableHead className="text-emerald-700">Items</TableHead>
+                <TableHead className="text-emerald-700">Total</TableHead>
+                <TableHead className="text-emerald-700">Status</TableHead>
+                <TableHead className="text-emerald-700">Payment</TableHead>
+                <TableHead className="w-12 text-emerald-700"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filtered.map((order) => (
-                <TableRow key={order.id} className="cursor-pointer hover:bg-amber-50/50" onClick={() => setView('admin-order-detail', order.id)}>
+                <TableRow key={order.id} className="cursor-pointer hover:bg-emerald-50/50" onClick={() => setView('admin-order-detail', order.id)}>
                   <TableCell className="font-medium text-sm">{order.orderNumber}</TableCell>
                   <TableCell>
                     <div>
@@ -102,7 +102,7 @@ export default function AdminOrders() {
                   </TableCell>
                   <TableCell className="text-sm">{order.date}</TableCell>
                   <TableCell className="text-sm">{order.items}</TableCell>
-                  <TableCell className="font-medium text-sm">₹{order.total}</TableCell>
+                  <TableCell className="font-medium text-sm text-emerald-600">₹{order.total}</TableCell>
                   <TableCell>
                     <Badge className={`text-xs ${statusColors[order.status] || ''}`}>{order.status}</Badge>
                   </TableCell>
@@ -110,7 +110,7 @@ export default function AdminOrders() {
                     <Badge className={`text-xs ${paymentColors[order.payment] || ''}`}>{order.payment}</Badge>
                   </TableCell>
                   <TableCell>
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                    <Button variant="ghost" size="icon" className="h-8 w-8 text-emerald-600 hover:text-emerald-700">
                       <Eye className="h-4 w-4" />
                     </Button>
                   </TableCell>

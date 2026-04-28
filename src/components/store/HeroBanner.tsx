@@ -10,21 +10,21 @@ const banners = [
     title: 'Premium Roasted Snacks',
     subtitle: 'Handcrafted with traditional spices since 1965',
     cta: 'Shop Now',
-    gradient: 'from-amber-600 via-orange-500 to-amber-700',
+    gradient: 'from-emerald-700 via-green-600 to-emerald-800',
     emoji: '🥜',
   },
   {
     title: 'Crispy, Crunchy & Delicious',
     subtitle: 'From farm-fresh peanuts & chickpeas to your doorstep',
     cta: 'Explore Products',
-    gradient: 'from-orange-600 via-red-500 to-orange-700',
+    gradient: 'from-black via-emerald-900 to-green-800',
     emoji: '🌰',
   },
   {
     title: 'Free Shipping on ₹500+',
     subtitle: 'Order your favorite snacks and save on delivery',
     cta: 'Start Shopping',
-    gradient: 'from-amber-700 via-amber-500 to-yellow-600',
+    gradient: 'from-emerald-600 via-green-700 to-emerald-900',
     emoji: '🚚',
   },
 ];
@@ -95,7 +95,7 @@ export default function HeroBanner() {
             >
               <Button
                 size="lg"
-                className="bg-white text-amber-700 hover:bg-amber-50 font-semibold shadow-lg hover:shadow-xl transition-all"
+                className="bg-white text-emerald-700 hover:bg-emerald-50 font-semibold shadow-lg hover:shadow-xl transition-all"
               >
                 {banners[current].cta}
                 <ChevronRight className="ml-1 h-4 w-4" />

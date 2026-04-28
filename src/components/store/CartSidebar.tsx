@@ -80,9 +80,9 @@ export default function CartSidebar() {
         className="fixed right-0 top-0 bottom-0 w-full sm:w-[420px] bg-white z-50 shadow-2xl flex flex-col"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b bg-amber-50">
+        <div className="flex items-center justify-between px-4 py-3 border-b bg-emerald-50">
           <div className="flex items-center gap-2">
-            <ShoppingBag className="h-5 w-5 text-amber-600" />
+            <ShoppingBag className="h-5 w-5 text-emerald-600" />
             <h2 className="font-semibold text-gray-900">Your Cart</h2>
             <span className="text-xs text-gray-500">({itemCount} items)</span>
           </div>
@@ -100,7 +100,7 @@ export default function CartSidebar() {
               Looks like you haven&apos;t added any snacks yet!
             </p>
             <Button
-              className="bg-amber-500 hover:bg-amber-600 text-white"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white"
               onClick={() => {
                 setCartSidebar(false);
                 setView('products');
@@ -133,7 +133,7 @@ export default function CartSidebar() {
                       className="flex gap-3 p-3 bg-gray-50 rounded-xl"
                     >
                       {/* Product icon */}
-                      <div className="w-14 h-14 bg-gradient-to-br from-amber-100 to-orange-100 rounded-lg flex items-center justify-center shrink-0">
+                      <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-green-100 rounded-lg flex items-center justify-center shrink-0">
                         <span className="text-2xl">🥜</span>
                       </div>
 
@@ -197,7 +197,7 @@ export default function CartSidebar() {
                     size="sm"
                     onClick={handleApplyPromo}
                     disabled={promoLoading || !promoCode.trim()}
-                    className="border-amber-300 text-amber-700 hover:bg-amber-50"
+                    className="border-emerald-300 text-emerald-700 hover:bg-emerald-50"
                   >
                     <Tag className="h-3.5 w-3.5 mr-1" />
                     Apply
@@ -263,7 +263,7 @@ export default function CartSidebar() {
               )}
 
               <Button
-                className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold h-11"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-11"
                 onClick={handleCheckout}
               >
                 Proceed to Checkout — {formatPrice(total)}
@@ -271,7 +271,7 @@ export default function CartSidebar() {
 
               <Button
                 variant="ghost"
-                className="w-full text-amber-600 hover:text-amber-700"
+                className="w-full text-emerald-600 hover:text-emerald-700"
                 onClick={() => {
                   setCartSidebar(false);
                   setView('products');

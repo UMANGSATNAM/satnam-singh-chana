@@ -78,7 +78,7 @@ export default function LoginPage() {
   return (
     <div className="max-w-md mx-auto px-4 py-8 sm:py-12">
       <div className="text-center mb-6">
-        <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
           <User className="h-7 w-7 text-white" />
         </div>
         <h1 className="text-2xl font-bold text-gray-900">
@@ -147,7 +147,7 @@ export default function LoginPage() {
 
             <Button
               type="submit"
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold"
+              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold"
               disabled={loading}
             >
               {loading ? 'Please wait...' : isLogin ? 'Sign In' : 'Create Account'}
@@ -157,7 +157,7 @@ export default function LoginPage() {
           <div className="mt-4 text-center">
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-amber-600 hover:text-amber-700"
+              className="text-sm text-emerald-600 hover:text-emerald-700"
             >
               {isLogin ? "Don't have an account? Register" : 'Already have an account? Sign in'}
             </button>
@@ -169,7 +169,7 @@ export default function LoginPage() {
             <p className="text-xs text-gray-500 text-center mb-3">Quick Demo Access</p>
             <Button
               variant="outline"
-              className="w-full border-amber-200 text-amber-700 hover:bg-amber-50"
+              className="w-full border-emerald-200 text-emerald-700 hover:bg-emerald-50"
               onClick={() => handleDemoLogin('customer')}
               disabled={loading}
             >

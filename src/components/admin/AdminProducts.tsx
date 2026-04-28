@@ -14,7 +14,7 @@ import type { Product } from '@/types';
 const formatPrice = (amount: number) => `₹${amount}`;
 
 const badgeColors: Record<string, string> = {
-  'Best Seller': 'bg-amber-100 text-amber-700',
+  'Best Seller': 'bg-emerald-100 text-emerald-700',
   'New': 'bg-emerald-100 text-emerald-700',
   'Sale': 'bg-red-100 text-red-700',
   'Limited': 'bg-purple-100 text-purple-700',
@@ -37,7 +37,7 @@ export default function AdminProducts() {
           <h2 className="text-lg font-semibold">Products</h2>
           <p className="text-sm text-gray-500">{products.length} products total</p>
         </div>
-        <Button onClick={() => setView('admin-add-product')} className="bg-amber-500 hover:bg-amber-600">
+        <Button onClick={() => setView('admin-add-product')} className="bg-emerald-600 hover:bg-emerald-700">
           <Plus className="h-4 w-4 mr-2" /> Add Product
         </Button>
       </div>
@@ -45,7 +45,7 @@ export default function AdminProducts() {
       <div className="flex items-center gap-3">
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-          <Input placeholder="Search products..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+          <Input placeholder="Search products..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 focus:ring-emerald-500 focus:border-emerald-500" />
         </div>
       </div>
 
@@ -53,21 +53,21 @@ export default function AdminProducts() {
         <CardContent className="p-0">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>Product</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>Badge</TableHead>
-                <TableHead>Variants</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="w-12"></TableHead>
+              <TableRow className="bg-emerald-50">
+                <TableHead className="text-emerald-700">Product</TableHead>
+                <TableHead className="text-emerald-700">Category</TableHead>
+                <TableHead className="text-emerald-700">Badge</TableHead>
+                <TableHead className="text-emerald-700">Variants</TableHead>
+                <TableHead className="text-emerald-700">Status</TableHead>
+                <TableHead className="w-12 text-emerald-700"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filtered.map((product) => (
-                <TableRow key={product.id} className="cursor-pointer hover:bg-amber-50/50" onClick={() => setView('admin-edit-product', product.id)}>
+                <TableRow key={product.id} className="cursor-pointer hover:bg-emerald-50/50" onClick={() => setView('admin-edit-product', product.id)}>
                   <TableCell>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm">
+                      <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-sm">
                         {product.name.charAt(0)}
                       </div>
                       <div>

@@ -25,8 +25,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   const saveAmount = variant.mrp - variant.price;
 
   const categoryColors: Record<string, string> = {
-    sing: 'bg-amber-100 text-amber-700',
-    chana: 'bg-orange-100 text-orange-700',
+    sing: 'bg-emerald-100 text-emerald-700',
+    chana: 'bg-green-100 text-green-700',
   };
 
   const badgeColors: Record<string, string> = {
@@ -36,10 +36,21 @@ export default function ProductCard({ product }: ProductCardProps) {
     'Limited': 'bg-purple-500 text-white',
   };
 
+  const productImages: Record<string, string> = {
+    'khari-sing': '/products/khari-sing.png',
+    'masala-sing': '/products/masala-sing.png',
+    'mori-sing': '/products/mori-sing.png',
+    'khara-chana': '/products/khara-chana.png',
+    'masala-chana': '/products/masala-chana.png',
+    'mora-chana': '/products/mora-chana.png',
+  };
+
   const categoryEmojis: Record<string, string> = {
     sing: '🥜',
     chana: '🌰',
   };
+
+  const productImage = productImages[product.slug];
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -80,17 +91,25 @@ export default function ProductCard({ product }: ProductCardProps) {
       transition={{ duration: 0.2 }}
     >
       <Card
-        className="group cursor-pointer overflow-hidden border-gray-200 hover:border-amber-300 hover:shadow-lg hover:shadow-amber-100/50 transition-all duration-300"
+        className="group cursor-pointer overflow-hidden border-gray-200 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-100/50 transition-all duration-300"
         onClick={handleCardClick}
       >
         <CardContent className="p-0">
-          {/* Image placeholder */}
-          <div className="relative aspect-square bg-gradient-to-br from-amber-50 to-orange-50 overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-5xl sm:text-6xl opacity-60 group-hover:scale-110 transition-transform duration-300">
-                {categoryEmojis[product.categorySlug] || '🥜'}
-              </span>
-            </div>
+          {/* Product Image */}
+          <div className="relative aspect-square bg-gradient-to-br from-emerald-50 to-green-50 overflow-hidden">
+            {productImage ? (
+              <img
+                src={productImage}
+                alt={product.name}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-5xl sm:text-6xl opacity-60 group-hover:scale-110 transition-transform duration-300">
+                  {categoryEmojis[product.categorySlug] || '🥜'}
+                </span>
+              </div>
+            )}
 
             {/* Badge */}
             {product.badge && (
@@ -130,7 +149,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             </span>
 
             {/* Name */}
-            <h3 className="font-semibold text-gray-900 text-sm leading-tight mb-1 line-clamp-2 group-hover:text-amber-700 transition-colors">
+            <h3 className="font-semibold text-gray-900 text-sm leading-tight mb-1 line-clamp-2 group-hover:text-emerald-700 transition-colors">
               {product.name}
             </h3>
 
@@ -143,7 +162,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                       key={star}
                       className={`h-3 w-3 ${
                         star <= Math.round(product.averageRating!)
-                          ? 'fill-amber-400 text-amber-400'
+                          ? 'fill-emerald-400 text-emerald-400'
                           : 'text-gray-200'
                       }`}
                     />
@@ -165,8 +184,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                     }}
                     className={`px-2.5 py-1 rounded-md text-[11px] font-medium border transition-all ${
                       idx === selectedVariantIdx
-                        ? 'bg-amber-500 text-white border-amber-500'
-                        : 'bg-white text-gray-600 border-gray-200 hover:border-amber-300 hover:text-amber-700'
+                        ? 'bg-emerald-600 text-white border-emerald-600'
+                        : 'bg-white text-gray-600 border-gray-200 hover:border-emerald-300 hover:text-emerald-700'
                     }`}
                   >
                     {v.weight}
@@ -189,7 +208,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {/* Add to cart */}
             <Button
               onClick={handleAddToCart}
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-medium text-sm h-9"
+              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm h-9"
               disabled={variant.stock === 0}
             >
               <ShoppingCart className="mr-1.5 h-4 w-4" />

@@ -80,10 +80,21 @@ export default function ProductDetail() {
     setQuantity(1);
   };
 
+  const productImages: Record<string, string> = {
+    'khari-sing': '/products/khari-sing.png',
+    'masala-sing': '/products/masala-sing.png',
+    'mori-sing': '/products/mori-sing.png',
+    'khara-chana': '/products/khara-chana.png',
+    'masala-chana': '/products/masala-chana.png',
+    'mora-chana': '/products/mora-chana.png',
+  };
+
   const categoryEmojis: Record<string, string> = {
     sing: '🥜',
     chana: '🌰',
   };
+
+  const productImage = productImages[product.slug];
 
   const badgeColors: Record<string, string> = {
     'Best Seller': 'bg-green-500 text-white',
@@ -98,7 +109,7 @@ export default function ProductDetail() {
       <Breadcrumb className="mb-4">
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink onClick={() => setView('home')} className="cursor-pointer text-amber-600">
+            <BreadcrumbLink onClick={() => setView('home')} className="cursor-pointer text-emerald-600">
               Home
             </BreadcrumbLink>
           </BreadcrumbItem>
@@ -108,7 +119,7 @@ export default function ProductDetail() {
               onClick={() => {
                 setView('products');
               }}
-              className="cursor-pointer text-amber-600"
+              className="cursor-pointer text-emerald-600"
             >
               Products
             </BreadcrumbLink>
@@ -120,7 +131,7 @@ export default function ProductDetail() {
                 useStore.getState().setFilters({ category: product.categorySlug });
                 setView('products');
               }}
-              className="cursor-pointer text-amber-600"
+              className="cursor-pointer text-emerald-600"
             >
               {product.categoryName}
             </BreadcrumbLink>
@@ -140,10 +151,20 @@ export default function ProductDetail() {
           animate={{ opacity: 1, x: 0 }}
           className="relative"
         >
-          <div className="aspect-square bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl flex items-center justify-center overflow-hidden border border-amber-100">
-            <span className="text-[120px] sm:text-[160px] opacity-50">
-              {categoryEmojis[product.categorySlug] || '🥜'}
-            </span>
+          <div className="aspect-square bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl overflow-hidden border border-emerald-100 relative">
+            {productImage ? (
+              <img
+                src={productImage}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full">
+                <span className="text-[120px] sm:text-[160px] opacity-50">
+                  {categoryEmojis[product.categorySlug] || '🥜'}
+                </span>
+              </div>
+            )}
             {product.badge && (
               <Badge className={`absolute top-4 left-4 text-sm font-semibold ${badgeColors[product.badge] || 'bg-gray-500 text-white'}`}>
                 {product.badge}
@@ -160,7 +181,7 @@ export default function ProductDetail() {
         >
           {/* Category & Badge */}
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="border-amber-300 text-amber-700 bg-amber-50">
+            <Badge variant="outline" className="border-emerald-300 text-emerald-700 bg-emerald-50">
               {product.categoryName}
             </Badge>
             {product.badge && (
@@ -182,7 +203,7 @@ export default function ProductDetail() {
                     key={star}
                     className={`h-4 w-4 ${
                       star <= Math.round(product.averageRating!)
-                        ? 'fill-amber-400 text-amber-400'
+                        ? 'fill-emerald-400 text-emerald-400'
                         : 'text-gray-200'
                     }`}
                   />
@@ -207,8 +228,8 @@ export default function ProductDetail() {
                   }}
                   className={`relative px-4 py-3 rounded-xl border-2 transition-all text-center min-w-[100px] ${
                     idx === selectedVariantIdx
-                      ? 'border-amber-500 bg-amber-50 shadow-sm'
-                      : 'border-gray-200 bg-white hover:border-amber-300'
+                      ? 'border-emerald-500 bg-emerald-50 shadow-sm'
+                      : 'border-gray-200 bg-white hover:border-emerald-300'
                   }`}
                 >
                   <span className="text-sm font-semibold">{v.weight}</span>
@@ -224,7 +245,7 @@ export default function ProductDetail() {
           </div>
 
           {/* Price */}
-          <div className="bg-amber-50 rounded-xl p-4 space-y-1">
+          <div className="bg-emerald-50 rounded-xl p-4 space-y-1">
             <div className="flex items-baseline gap-3">
               <span className="text-3xl font-bold text-gray-900">{formatPrice(variant.price)}</span>
               {variant.mrp > variant.price && (
@@ -265,7 +286,7 @@ export default function ProductDetail() {
             </div>
 
             <Button
-              className="flex-1 bg-amber-500 hover:bg-amber-600 text-white font-semibold h-11"
+              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-11"
               onClick={handleAddToCart}
               disabled={variant.stock === 0}
             >
@@ -288,21 +309,21 @@ export default function ProductDetail() {
 
           {/* Stock info */}
           {variant.stock > 0 && variant.stock <= 10 && (
-            <p className="text-xs text-orange-600 font-medium">🔥 Only {variant.stock} left in stock!</p>
+            <p className="text-xs text-green-600 font-medium">🔥 Only {variant.stock} left in stock!</p>
           )}
 
           {/* Trust badges */}
           <div className="grid grid-cols-3 gap-2">
             <div className="flex flex-col items-center gap-1 p-2 rounded-lg bg-gray-50">
-              <Truck className="h-5 w-5 text-amber-600" />
+              <Truck className="h-5 w-5 text-emerald-600" />
               <span className="text-[10px] text-gray-600 text-center">Free Shipping 500+</span>
             </div>
             <div className="flex flex-col items-center gap-1 p-2 rounded-lg bg-gray-50">
-              <RotateCcw className="h-5 w-5 text-amber-600" />
+              <RotateCcw className="h-5 w-5 text-emerald-600" />
               <span className="text-[10px] text-gray-600 text-center">7-Day Returns</span>
             </div>
             <div className="flex flex-col items-center gap-1 p-2 rounded-lg bg-gray-50">
-              <ShieldCheck className="h-5 w-5 text-amber-600" />
+              <ShieldCheck className="h-5 w-5 text-emerald-600" />
               <span className="text-[10px] text-gray-600 text-center">100% Authentic</span>
             </div>
           </div>
@@ -319,7 +340,7 @@ export default function ProductDetail() {
           {product.tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5">
               {product.tags.map((tag) => (
-                <Badge key={tag} variant="secondary" className="text-xs bg-amber-50 text-amber-700 hover:bg-amber-100">
+                <Badge key={tag} variant="secondary" className="text-xs bg-emerald-50 text-emerald-700 hover:bg-emerald-100">
                   <Tag className="h-2.5 w-2.5 mr-1" />
                   {tag}
                 </Badge>
@@ -352,7 +373,7 @@ export default function ProductDetail() {
                   key={s}
                   className={`h-6 w-6 ${
                     s <= Math.round(product.averageRating || 0)
-                      ? 'fill-amber-400 text-amber-400'
+                      ? 'fill-emerald-400 text-emerald-400'
                       : 'text-gray-200'
                   }`}
                 />

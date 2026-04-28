@@ -83,7 +83,7 @@ export default function Header({ settings }: HeaderProps) {
   const tagline = settings?.storeTagline || 'Premium Roasted Snacks';
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60">
+    <header className="sticky top-0 z-50 w-full border-b border-emerald-200/50 bg-white/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60">
       <div className="max-w-7xl mx-auto px-4">
         {/* Top bar */}
         <div className="flex items-center justify-between h-16 gap-4">
@@ -92,14 +92,14 @@ export default function Header({ settings }: HeaderProps) {
             onClick={() => setView('home')}
             className="flex items-center gap-2 shrink-0 group"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
               <span className="text-white font-bold text-sm">SS</span>
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-lg font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors">
+              <h1 className="text-lg font-bold text-gray-900 leading-tight group-hover:text-emerald-700 transition-colors">
                 {storeName}
               </h1>
-              <p className="text-[10px] text-amber-600 font-medium -mt-0.5">{tagline}</p>
+              <p className="text-[10px] text-emerald-600 font-medium -mt-0.5">{tagline}</p>
             </div>
           </button>
 
@@ -111,7 +111,7 @@ export default function Header({ settings }: HeaderProps) {
                 placeholder="Search snacks..."
                 value={localSearch}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="pl-10 bg-amber-50/50 border-amber-200/50 focus:border-amber-400 focus:ring-amber-400/20 h-10"
+                className="pl-10 bg-emerald-50/50 border-emerald-200/50 focus:border-emerald-400 focus:ring-emerald-400/20 h-10"
               />
               {localSearch && (
                 <button
@@ -138,8 +138,8 @@ export default function Header({ settings }: HeaderProps) {
                 onClick={() => handleCategoryFilter(cat.value)}
                 className={
                   filters.category === cat.value
-                    ? 'bg-amber-500 hover:bg-amber-600 text-white'
-                    : 'text-gray-600 hover:text-amber-700 hover:bg-amber-50'
+                    ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                    : 'text-gray-600 hover:text-emerald-700 hover:bg-emerald-50'
                 }
               >
                 {cat.label}
@@ -153,7 +153,7 @@ export default function Header({ settings }: HeaderProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-gray-600 hover:text-amber-700"
+              className="md:hidden text-gray-600 hover:text-emerald-700"
               onClick={() => {
                 setView('products');
                 setSearchQuery('');
@@ -166,7 +166,7 @@ export default function Header({ settings }: HeaderProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="relative text-gray-600 hover:text-amber-700 hover:bg-amber-50"
+              className="relative text-gray-600 hover:text-emerald-700 hover:bg-emerald-50"
               onClick={() => setView('wishlist')}
             >
               <Heart className="h-5 w-5" />
@@ -181,12 +181,12 @@ export default function Header({ settings }: HeaderProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="relative text-gray-600 hover:text-amber-700 hover:bg-amber-50"
+              className="relative text-gray-600 hover:text-emerald-700 hover:bg-emerald-50"
               onClick={() => setCartSidebar(true)}
             >
               <ShoppingCart className="h-5 w-5" />
               {cartItemCount > 0 && (
-                <Badge className="absolute -top-1 -right-1 h-5 min-w-5 p-0 flex items-center justify-center bg-amber-500 text-[10px] text-white border-0">
+                <Badge className="absolute -top-1 -right-1 h-5 min-w-5 p-0 flex items-center justify-center bg-emerald-600 text-[10px] text-white border-0">
                   {cartItemCount}
                 </Badge>
               )}
@@ -198,7 +198,7 @@ export default function Header({ settings }: HeaderProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-gray-600 hover:text-amber-700 hover:bg-amber-50"
+                  className="text-gray-600 hover:text-emerald-700 hover:bg-emerald-50"
                 >
                   <User className="h-5 w-5" />
                 </Button>
@@ -251,7 +251,7 @@ export default function Header({ settings }: HeaderProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="lg:hidden text-gray-600 hover:text-amber-700"
+                  className="lg:hidden text-gray-600 hover:text-emerald-700"
                   onClick={() => setMobileMenu(true)}
                 >
                   <Menu className="h-5 w-5" />
@@ -261,7 +261,7 @@ export default function Header({ settings }: HeaderProps) {
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <div className="flex flex-col h-full">
                   {/* Mobile header */}
-                  <div className="p-4 border-b bg-gradient-to-r from-amber-500 to-orange-500">
+                  <div className="p-4 border-b bg-gradient-to-r from-emerald-600 to-green-600">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
                         <span className="text-white font-bold text-sm">SS</span>
@@ -388,14 +388,14 @@ function MobileNavItem({
       onClick={onClick}
       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
         active
-          ? 'bg-amber-100 text-amber-800 font-medium'
-          : 'text-gray-700 hover:bg-amber-50 hover:text-amber-700'
+          ? 'bg-emerald-100 text-emerald-800 font-medium'
+          : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'
       }`}
     >
       {icon}
       <span className="flex-1 text-left">{label}</span>
       {badge && (
-        <Badge className="bg-amber-500 text-white text-[10px] h-5 min-w-5 border-0">
+        <Badge className="bg-emerald-600 text-white text-[10px] h-5 min-w-5 border-0">
           {badge}
         </Badge>
       )}

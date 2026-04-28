@@ -33,7 +33,7 @@ export default function AdminCustomers() {
           <h2 className="text-lg font-semibold">Customers</h2>
           <p className="text-sm text-gray-500">{mockCustomers.length} registered customers</p>
         </div>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" className="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
           <Download className="h-4 w-4 mr-2" /> Export CSV
         </Button>
       </div>
@@ -41,7 +41,7 @@ export default function AdminCustomers() {
       <div className="flex items-center gap-3">
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-          <Input placeholder="Search customers..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+          <Input placeholder="Search customers..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 focus:ring-emerald-500 focus:border-emerald-500" />
         </div>
       </div>
 
@@ -49,29 +49,34 @@ export default function AdminCustomers() {
         <CardContent className="p-0">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>Customer</TableHead>
-                <TableHead>Phone</TableHead>
-                <TableHead>Orders</TableHead>
-                <TableHead>Total Spent</TableHead>
-                <TableHead>Loyalty Pts</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Joined</TableHead>
-                <TableHead className="w-12"></TableHead>
+              <TableRow className="bg-emerald-50">
+                <TableHead className="text-emerald-700">Customer</TableHead>
+                <TableHead className="text-emerald-700">Phone</TableHead>
+                <TableHead className="text-emerald-700">Orders</TableHead>
+                <TableHead className="text-emerald-700">Total Spent</TableHead>
+                <TableHead className="text-emerald-700">Loyalty Pts</TableHead>
+                <TableHead className="text-emerald-700">Status</TableHead>
+                <TableHead className="text-emerald-700">Joined</TableHead>
+                <TableHead className="w-12 text-emerald-700"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filtered.map((customer) => (
-                <TableRow key={customer.id}>
+                <TableRow key={customer.id} className="hover:bg-emerald-50/50">
                   <TableCell>
-                    <div>
-                      <p className="font-medium text-sm">{customer.name}</p>
-                      <p className="text-xs text-gray-500">{customer.email}</p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">
+                        {customer.name.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-medium text-sm">{customer.name}</p>
+                        <p className="text-xs text-gray-500">{customer.email}</p>
+                      </div>
                     </div>
                   </TableCell>
                   <TableCell className="text-sm">{customer.phone}</TableCell>
                   <TableCell className="text-sm">{customer.orders}</TableCell>
-                  <TableCell className="font-medium text-sm">₹{customer.totalSpent.toLocaleString()}</TableCell>
+                  <TableCell className="font-medium text-sm text-emerald-600">₹{customer.totalSpent.toLocaleString()}</TableCell>
                   <TableCell className="text-sm">{customer.loyalty}</TableCell>
                   <TableCell>
                     <Badge className={`text-xs ${customer.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
@@ -88,13 +93,13 @@ export default function AdminCustomers() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem>
-                          <CheckCircle className="h-4 w-4 mr-2" /> View Orders
+                          <CheckCircle className="h-4 w-4 mr-2 text-emerald-600" /> View Orders
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           {customer.status === 'active' ? (
                             <><Ban className="h-4 w-4 mr-2" /> Block</>
                           ) : (
-                            <><CheckCircle className="h-4 w-4 mr-2" /> Unblock</>
+                            <><CheckCircle className="h-4 w-4 mr-2 text-emerald-600" /> Unblock</>
                           )}
                         </DropdownMenuItem>
                       </DropdownMenuContent>

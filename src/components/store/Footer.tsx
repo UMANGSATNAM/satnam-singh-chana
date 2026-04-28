@@ -33,9 +33,9 @@ export default function Footer({ settings }: FooterProps) {
   const freeShipping = settings?.freeShippingAbove || 500;
 
   return (
-    <footer className="mt-auto bg-gray-900 text-gray-300">
+    <footer className="mt-auto bg-black text-gray-300">
       {/* Top banner */}
-      <div className="bg-gradient-to-r from-amber-600 to-orange-600 text-white">
+      <div className="bg-gradient-to-r from-emerald-600 via-green-600 to-emerald-700 text-white">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
             <div className="flex items-center justify-center gap-2">
@@ -60,7 +60,7 @@ export default function Footer({ settings }: FooterProps) {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center">
                 <span className="text-white font-bold text-xs">SS</span>
               </div>
               <span className="text-white font-bold text-lg">{storeName}</span>
@@ -85,7 +85,7 @@ export default function Footer({ settings }: FooterProps) {
                 <li key={link.label}>
                   <button
                     onClick={() => setView(link.view)}
-                    className="text-sm text-gray-400 hover:text-amber-400 transition-colors"
+                    className="text-sm text-gray-400 hover:text-emerald-400 transition-colors"
                   >
                     {link.label}
                   </button>
@@ -99,22 +99,22 @@ export default function Footer({ settings }: FooterProps) {
             <h3 className="text-white font-semibold mb-4">Customer Service</h3>
             <ul className="space-y-2.5 text-sm text-gray-400">
               <li>
-                <button className="hover:text-amber-400 transition-colors">About Us</button>
+                <button className="hover:text-emerald-400 transition-colors">About Us</button>
               </li>
               <li>
-                <button className="hover:text-amber-400 transition-colors">Contact Us</button>
+                <button className="hover:text-emerald-400 transition-colors">Contact Us</button>
               </li>
               <li>
-                <button className="hover:text-amber-400 transition-colors">Shipping Policy</button>
+                <button className="hover:text-emerald-400 transition-colors">Shipping Policy</button>
               </li>
               <li>
-                <button className="hover:text-amber-400 transition-colors">Return & Refund Policy</button>
+                <button className="hover:text-emerald-400 transition-colors">Return & Refund Policy</button>
               </li>
               <li>
-                <button className="hover:text-amber-400 transition-colors">Privacy Policy</button>
+                <button className="hover:text-emerald-400 transition-colors">Privacy Policy</button>
               </li>
               <li>
-                <button className="hover:text-amber-400 transition-colors">Terms & Conditions</button>
+                <button className="hover:text-emerald-400 transition-colors">Terms & Conditions</button>
               </li>
             </ul>
           </div>
@@ -124,18 +124,18 @@ export default function Footer({ settings }: FooterProps) {
             <h3 className="text-white font-semibold mb-4">Get In Touch</h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2 text-gray-400">
-                <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-amber-500" />
+                <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-emerald-500" />
                 <span>{address}</span>
               </li>
               <li className="flex items-center gap-2 text-gray-400">
-                <Phone className="h-4 w-4 shrink-0 text-amber-500" />
-                <a href={`tel:${phone.replace(/\s/g, '')}`} className="hover:text-amber-400 transition-colors">
+                <Phone className="h-4 w-4 shrink-0 text-emerald-500" />
+                <a href={`tel:${phone.replace(/\s/g, '')}`} className="hover:text-emerald-400 transition-colors">
                   {phone}
                 </a>
               </li>
               <li className="flex items-center gap-2 text-gray-400">
-                <Mail className="h-4 w-4 shrink-0 text-amber-500" />
-                <a href={`mailto:${email}`} className="hover:text-amber-400 transition-colors">
+                <Mail className="h-4 w-4 shrink-0 text-emerald-500" />
+                <a href={`mailto:${email}`} className="hover:text-emerald-400 transition-colors">
                   {email}
                 </a>
               </li>
@@ -155,7 +155,7 @@ export default function Footer({ settings }: FooterProps) {
                     key={Icon.displayName}
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 rounded-full bg-gray-800 hover:bg-amber-500 text-gray-400 hover:text-white transition-colors"
+                    className="h-8 w-8 rounded-full bg-gray-800 hover:bg-emerald-600 text-gray-400 hover:text-white transition-colors"
                     asChild={!!href}
                   >
                     {href ? (

@@ -60,15 +60,15 @@ function SidebarContent({ currentView, setView, user, onNavClick }: SidebarConte
   return (
     <div className="flex flex-col h-full">
       <div className="p-4 flex items-center gap-3">
-        <div className="w-9 h-9 rounded-lg bg-amber-500 flex items-center justify-center">
+        <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center">
           <span className="text-white font-bold text-sm">SS</span>
         </div>
         <div>
           <h2 className="text-white font-semibold text-sm">Satnam Singh Chana</h2>
-          <p className="text-gray-400 text-xs">Admin Panel</p>
+          <p className="text-emerald-400 text-xs">Admin Panel</p>
         </div>
       </div>
-      <Separator className="bg-gray-700" />
+      <Separator className="bg-gray-800" />
       <ScrollArea className="flex-1 py-2">
         <nav className="space-y-1 px-2">
           {navItems.map((item) => {
@@ -82,8 +82,8 @@ function SidebarContent({ currentView, setView, user, onNavClick }: SidebarConte
                 className={cn(
                   'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors',
                   isActive
-                    ? 'bg-amber-500/20 text-amber-400'
-                    : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                    ? 'bg-emerald-600 text-white'
+                    : 'text-gray-400 hover:bg-emerald-900/30 hover:text-emerald-400'
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -93,17 +93,17 @@ function SidebarContent({ currentView, setView, user, onNavClick }: SidebarConte
           })}
         </nav>
       </ScrollArea>
-      <Separator className="bg-gray-700" />
+      <Separator className="bg-gray-800" />
       <div className="p-3">
         <Button
           variant="ghost"
-          className="w-full text-gray-300 hover:text-white hover:bg-gray-800 justify-start gap-2"
+          className="w-full text-gray-400 hover:text-emerald-400 hover:bg-emerald-900/30 justify-start gap-2"
           onClick={() => setView('home')}
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Store
         </Button>
-        <div className="mt-2 px-3 py-2 text-xs text-gray-500">
+        <div className="mt-2 px-3 py-2 text-xs text-gray-600">
           {user?.name || 'Admin User'}
         </div>
       </div>
@@ -143,7 +143,7 @@ export default function AdminLayout() {
   return (
     <div className="min-h-screen flex bg-gray-50">
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-64 bg-gray-900 flex-shrink-0">
+      <aside className="hidden md:flex w-64 bg-black flex-shrink-0">
         <SidebarContent currentView={currentView} setView={setView} user={user} />
       </aside>
 
@@ -151,9 +151,9 @@ export default function AdminLayout() {
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div className="fixed inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
-          <aside className="fixed left-0 top-0 h-full w-64 bg-gray-900 z-50">
+          <aside className="fixed left-0 top-0 h-full w-64 bg-black z-50">
             <div className="absolute top-3 right-3">
-              <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(false)} className="text-gray-400">
+              <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(false)} className="text-gray-400 hover:text-emerald-400">
                 <X className="h-5 w-5" />
               </Button>
             </div>

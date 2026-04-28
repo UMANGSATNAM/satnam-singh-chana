@@ -47,7 +47,7 @@ export default function AdminSettingsNotifications() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <Mail className="h-5 w-5 text-amber-600" />
+            <Mail className="h-5 w-5 text-emerald-600" />
             <CardTitle className="text-base">Email Notifications</CardTitle>
           </div>
         </CardHeader>
@@ -218,7 +218,7 @@ export default function AdminSettingsNotifications() {
       </Card>
 
       <div className="flex justify-end">
-        <Button className="bg-amber-500 hover:bg-amber-600">
+        <Button className="bg-emerald-600 hover:bg-emerald-700">
           <Save className="h-4 w-4 mr-2" /> Save Notification Settings
         </Button>
       </div>

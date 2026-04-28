@@ -5,11 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Settings, CreditCard, Bell, Truck, Globe, Store } from 'lucide-react';
 
 const settingCards = [
-  { view: 'admin-settings-general' as const, title: 'General', description: 'Store name, contact info, GST, invoice settings', icon: Store, color: 'bg-amber-100 text-amber-700' },
+  { view: 'admin-settings-general' as const, title: 'General', description: 'Store name, contact info, GST, invoice settings', icon: Store, color: 'bg-emerald-100 text-emerald-700' },
   { view: 'admin-settings-payment' as const, title: 'Payment Gateways', description: 'Razorpay, PayU, Stripe, COD configuration', icon: CreditCard, color: 'bg-emerald-100 text-emerald-700' },
-  { view: 'admin-settings-notifications' as const, title: 'Notifications', description: 'Email, SMS, WhatsApp templates and settings', icon: Bell, color: 'bg-blue-100 text-blue-700' },
-  { view: 'admin-settings-shipping' as const, title: 'Shipping & Returns', description: 'Zones, rates, delivery slots, return policy', icon: Truck, color: 'bg-purple-100 text-purple-700' },
-  { view: 'admin-settings-seo' as const, title: 'SEO & Analytics', description: 'Meta tags, GA4, Facebook Pixel, sitemap', icon: Globe, color: 'bg-orange-100 text-orange-700' },
+  { view: 'admin-settings-notifications' as const, title: 'Notifications', description: 'Email, SMS, WhatsApp templates and settings', icon: Bell, color: 'bg-green-100 text-green-700' },
+  { view: 'admin-settings-shipping' as const, title: 'Shipping & Returns', description: 'Zones, rates, delivery slots, return policy', icon: Truck, color: 'bg-emerald-50 text-emerald-600' },
+  { view: 'admin-settings-seo' as const, title: 'SEO & Analytics', description: 'Meta tags, GA4, Facebook Pixel, sitemap', icon: Globe, color: 'bg-green-100 text-green-700' },
 ];
 
 export default function AdminSettings() {
@@ -28,7 +28,7 @@ export default function AdminSettings() {
           return (
             <Card
               key={card.view}
-              className="cursor-pointer hover:shadow-md transition-all hover:border-amber-300"
+              className="cursor-pointer hover:shadow-md transition-all hover:border-emerald-300"
               onClick={() => setView(card.view)}
             >
               <CardContent className="p-6">

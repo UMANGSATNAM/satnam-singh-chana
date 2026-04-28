@@ -130,13 +130,13 @@ export default function CheckoutPage() {
         </motion.div>
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Order Placed! 🎉</h1>
         <p className="text-gray-500 mb-4">Your delicious snacks are on their way!</p>
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+        <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
           <p className="text-sm text-gray-600">Order Number</p>
-          <p className="text-xl font-bold text-amber-700">{orderNumber}</p>
+          <p className="text-xl font-bold text-emerald-700">{orderNumber}</p>
         </div>
         <div className="space-y-3">
           <Button
-            className="w-full bg-amber-500 hover:bg-amber-600 text-white"
+            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
             onClick={() => setView('orders')}
           >
             View My Orders
@@ -155,7 +155,7 @@ export default function CheckoutPage() {
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
         <span className="text-6xl block mb-4">🛒</span>
         <h2 className="text-xl font-semibold text-gray-700 mb-2">Your cart is empty</h2>
-        <Button className="bg-amber-500 hover:bg-amber-600 text-white mt-4" onClick={() => setView('products')}>
+        <Button className="bg-emerald-600 hover:bg-emerald-700 text-white mt-4" onClick={() => setView('products')}>
           Browse Products
         </Button>
       </div>
@@ -179,7 +179,7 @@ export default function CheckoutPage() {
             <div
               className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium ${
                 idx <= currentStepIdx
-                  ? 'bg-amber-500 text-white'
+                  ? 'bg-emerald-600 text-white'
                   : 'bg-gray-100 text-gray-400'
               }`}
             >
@@ -191,7 +191,7 @@ export default function CheckoutPage() {
               <span className="hidden sm:inline">{s.label}</span>
             </div>
             {idx < steps.length - 1 && (
-              <div className={`w-8 sm:w-16 h-0.5 mx-1 ${idx < currentStepIdx ? 'bg-amber-500' : 'bg-gray-200'}`} />
+              <div className={`w-8 sm:w-16 h-0.5 mx-1 ${idx < currentStepIdx ? 'bg-emerald-600' : 'bg-gray-200'}`} />
             )}
           </div>
         ))}
@@ -205,7 +205,7 @@ export default function CheckoutPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-amber-500" />
+                  <MapPin className="h-5 w-5 text-emerald-600" />
                   Delivery Address
                 </CardTitle>
               </CardHeader>
@@ -283,7 +283,7 @@ export default function CheckoutPage() {
 
                 <div className="flex justify-end pt-4">
                   <Button
-                    className="bg-amber-500 hover:bg-amber-600 text-white"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white"
                     onClick={() => setStep('payment')}
                     disabled={!isAddressValid}
                   >
@@ -299,13 +299,13 @@ export default function CheckoutPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <CreditCard className="h-5 w-5 text-amber-500" />
+                  <CreditCard className="h-5 w-5 text-emerald-600" />
                   Payment Method
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <RadioGroup value={paymentMethod} onValueChange={(v) => setPaymentMethod(v as PaymentMethod)}>
-                  <div className="flex items-center space-x-3 p-4 border rounded-xl hover:border-amber-300 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-4 border rounded-xl hover:border-emerald-300 transition-colors cursor-pointer">
                     <RadioGroupItem value="cod" id="cod" />
                     <Label htmlFor="cod" className="flex-1 cursor-pointer">
                       <div className="flex items-center gap-3">
@@ -366,7 +366,7 @@ export default function CheckoutPage() {
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back
                   </Button>
                   <Button
-                    className="bg-amber-500 hover:bg-amber-600 text-white"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white"
                     onClick={() => setStep('review')}
                   >
                     Review Order <ArrowRight className="ml-2 h-4 w-4" />
@@ -381,7 +381,7 @@ export default function CheckoutPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Package className="h-5 w-5 text-amber-500" />
+                  <Package className="h-5 w-5 text-emerald-600" />
                   Order Review
                 </CardTitle>
               </CardHeader>
@@ -392,7 +392,7 @@ export default function CheckoutPage() {
                     <p className="font-medium text-sm text-gray-700">Delivery Address</p>
                     <button
                       onClick={() => setStep('address')}
-                      className="text-xs text-amber-600 hover:text-amber-700"
+                      className="text-xs text-emerald-600 hover:text-emerald-700"
                     >
                       Change
                     </button>
@@ -412,7 +412,7 @@ export default function CheckoutPage() {
                     <p className="font-medium text-sm text-gray-700">Payment Method</p>
                     <button
                       onClick={() => setStep('payment')}
-                      className="text-xs text-amber-600 hover:text-amber-700"
+                      className="text-xs text-emerald-600 hover:text-emerald-700"
                     >
                       Change
                     </button>
@@ -446,7 +446,7 @@ export default function CheckoutPage() {
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back
                   </Button>
                   <Button
-                    className="bg-amber-500 hover:bg-amber-600 text-white font-semibold"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold"
                     onClick={handlePlaceOrder}
                     disabled={loading}
                   >
@@ -494,7 +494,7 @@ export default function CheckoutPage() {
               </div>
 
               {paymentMethod === 'cod' && (
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-2.5 text-xs text-amber-700">
+                <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5 text-xs text-emerald-700">
                   <Truck className="h-3.5 w-3.5 inline mr-1" />
                   COD orders include a ₹30 handling fee
                 </div>

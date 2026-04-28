@@ -13,11 +13,11 @@ import type { Order } from '@/types';
 const statusColors: Record<string, string> = {
   placed: 'bg-blue-100 text-blue-700',
   confirmed: 'bg-indigo-100 text-indigo-700',
-  packed: 'bg-amber-100 text-amber-700',
+  packed: 'bg-emerald-100 text-emerald-700',
   shipped: 'bg-purple-100 text-purple-700',
   delivered: 'bg-green-100 text-green-700',
   cancelled: 'bg-red-100 text-red-700',
-  returned: 'bg-orange-100 text-orange-700',
+  returned: 'bg-green-100 text-green-700',
 };
 
 export default function OrdersPage() {
@@ -52,7 +52,7 @@ export default function OrdersPage() {
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
         <span className="text-6xl block mb-4">🔒</span>
         <h2 className="text-xl font-semibold text-gray-700 mb-2">Please login to view orders</h2>
-        <Button className="bg-amber-500 hover:bg-amber-600 text-white mt-4" onClick={() => setView('login')}>
+        <Button className="bg-emerald-600 hover:bg-emerald-700 text-white mt-4" onClick={() => setView('login')}>
           Login
         </Button>
       </div>
@@ -83,12 +83,12 @@ export default function OrdersPage() {
 
       {orders.length === 0 ? (
         <div className="text-center py-16">
-          <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Package className="h-10 w-10 text-amber-400" />
+          <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Package className="h-10 w-10 text-emerald-400" />
           </div>
           <h2 className="text-xl font-semibold text-gray-700 mb-2">No orders yet</h2>
           <p className="text-gray-500 mb-6">Your order history will appear here</p>
-          <Button className="bg-amber-500 hover:bg-amber-600 text-white" onClick={() => setView('products')}>
+          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => setView('products')}>
             Start Shopping
           </Button>
         </div>

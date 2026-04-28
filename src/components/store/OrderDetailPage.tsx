@@ -81,7 +81,7 @@ export default function OrderDetailPage() {
               {/* Progress line */}
               <div className="absolute top-4 left-0 right-0 h-0.5 bg-gray-200">
                 <motion.div
-                  className="h-full bg-amber-500"
+                  className="h-full bg-emerald-600"
                   initial={{ width: 0 }}
                   animate={{ width: `${(currentStepIdx / (statusSteps.length - 1)) * 100}%` }}
                   transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -98,15 +98,15 @@ export default function OrderDetailPage() {
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center ${
                         isCompleted
-                          ? 'bg-amber-500 text-white'
+                          ? 'bg-emerald-600 text-white'
                           : 'bg-white border-2 border-gray-200 text-gray-300'
-                      } ${isCurrent ? 'ring-2 ring-amber-200 ring-offset-2' : ''}`}
+                      } ${isCurrent ? 'ring-2 ring-emerald-200 ring-offset-2' : ''}`}
                     >
                       <Icon className="h-4 w-4" />
                     </div>
                     <span
                       className={`text-[10px] mt-1.5 text-center ${
-                        isCompleted ? 'text-amber-700 font-medium' : 'text-gray-400'
+                        isCompleted ? 'text-emerald-700 font-medium' : 'text-gray-400'
                       }`}
                     >
                       {step.label}
@@ -121,11 +121,11 @@ export default function OrderDetailPage() {
 
       {/* Cancelled/Returned badge */}
       {(isCancelled || isReturned) && (
-        <div className={`mb-6 p-4 rounded-xl text-center ${isCancelled ? 'bg-red-50 border border-red-200' : 'bg-orange-50 border border-orange-200'}`}>
-          <Badge className={`${isCancelled ? 'bg-red-500' : 'bg-orange-500'} text-white mb-2`}>
+        <div className={`mb-6 p-4 rounded-xl text-center ${isCancelled ? 'bg-red-50 border border-red-200' : 'bg-green-50 border border-green-200'}`}>
+          <Badge className={`${isCancelled ? 'bg-red-500' : 'bg-green-500'} text-white mb-2`}>
             {isCancelled ? 'Cancelled' : 'Returned'}
           </Badge>
-          <p className={`text-sm ${isCancelled ? 'text-red-700' : 'text-orange-700'}`}>
+          <p className={`text-sm ${isCancelled ? 'text-red-700' : 'text-green-700'}`}>
             This order has been {order.status}
           </p>
         </div>
@@ -140,7 +140,7 @@ export default function OrderDetailPage() {
               {order.items.map((item) => (
                 <div key={item.id} className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center">
+                    <div className="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center">
                       <span className="text-lg">🥜</span>
                     </div>
                     <div>
@@ -160,7 +160,7 @@ export default function OrderDetailPage() {
           <Card>
             <CardContent className="p-4">
               <h2 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-amber-500" />
+                <MapPin className="h-4 w-4 text-emerald-600" />
                 Delivery Address
               </h2>
               {order.address && (
@@ -178,7 +178,7 @@ export default function OrderDetailPage() {
           <Card>
             <CardContent className="p-4">
               <h2 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <CreditCard className="h-4 w-4 text-amber-500" />
+                <CreditCard className="h-4 w-4 text-emerald-600" />
                 Payment Info
               </h2>
               <div className="text-sm space-y-1">

@@ -7,9 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
 import { Plus, Trash2, ArrowLeft, Save } from 'lucide-react';
 import { useState } from 'react';
 
@@ -76,7 +74,7 @@ export default function AdminAddProduct() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Product Name</Label>
-              <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g., Khari Sing" />
+              <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g., Khari Sing" className="focus:ring-emerald-500 focus:border-emerald-500" />
             </div>
             <div className="space-y-2">
               <Label>Slug</Label>
@@ -85,13 +83,13 @@ export default function AdminAddProduct() {
           </div>
           <div className="space-y-2">
             <Label>Description</Label>
-            <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Product description..." rows={4} />
+            <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Product description..." rows={4} className="focus:ring-emerald-500 focus:border-emerald-500" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Category</Label>
               <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger><SelectValue placeholder="Select category" /></SelectTrigger>
+                <SelectTrigger className="focus:ring-emerald-500"><SelectValue placeholder="Select category" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="sing">Sing</SelectItem>
                   <SelectItem value="chana">Chana</SelectItem>
@@ -100,13 +98,13 @@ export default function AdminAddProduct() {
             </div>
             <div className="space-y-2">
               <Label>Tags</Label>
-              <Input value={tags} onChange={(e) => setTags(e.target.value)} placeholder="salty, crunchy, khari" />
+              <Input value={tags} onChange={(e) => setTags(e.target.value)} placeholder="salty, crunchy, khari" className="focus:ring-emerald-500 focus:border-emerald-500" />
             </div>
           </div>
           <div className="space-y-2">
             <Label>Badge</Label>
             <Select value={badge} onValueChange={setBadge}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger className="focus:ring-emerald-500"><SelectValue /></SelectTrigger>
               <SelectContent>
                 {badges.map(b => <SelectItem key={b} value={b}>{b}</SelectItem>)}
               </SelectContent>
@@ -119,16 +117,16 @@ export default function AdminAddProduct() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-base">Variants</CardTitle>
-            <Button size="sm" variant="outline" onClick={addVariant}>
+            <Button size="sm" variant="outline" onClick={addVariant} className="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
               <Plus className="h-4 w-4 mr-1" /> Add Variant
             </Button>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
           {variants.map((variant, index) => (
-            <div key={index} className="p-4 border rounded-lg space-y-3">
+            <div key={index} className="p-4 border rounded-lg space-y-3 focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium">Variant {index + 1}</span>
+                <span className="text-sm font-medium text-emerald-700">Variant {index + 1}</span>
                 {variants.length > 1 && (
                   <Button size="sm" variant="ghost" onClick={() => removeVariant(index)} className="text-red-500 h-7">
                     <Trash2 className="h-3.5 w-3.5" />
@@ -138,23 +136,23 @@ export default function AdminAddProduct() {
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 <div className="space-y-1">
                   <Label className="text-xs">SKU</Label>
-                  <Input value={variant.sku} onChange={(e) => updateVariant(index, 'sku', e.target.value)} placeholder="SSC-KS-500" />
+                  <Input value={variant.sku} onChange={(e) => updateVariant(index, 'sku', e.target.value)} placeholder="SSC-KS-500" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
                 <div className="space-y-1">
                   <Label className="text-xs">Weight</Label>
-                  <Input value={variant.weight} onChange={(e) => updateVariant(index, 'weight', e.target.value)} placeholder="500g" />
+                  <Input value={variant.weight} onChange={(e) => updateVariant(index, 'weight', e.target.value)} placeholder="500g" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
                 <div className="space-y-1">
                   <Label className="text-xs">Price (₹)</Label>
-                  <Input type="number" value={variant.price} onChange={(e) => updateVariant(index, 'price', e.target.value)} placeholder="120" />
+                  <Input type="number" value={variant.price} onChange={(e) => updateVariant(index, 'price', e.target.value)} placeholder="120" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
                 <div className="space-y-1">
                   <Label className="text-xs">MRP (₹)</Label>
-                  <Input type="number" value={variant.mrp} onChange={(e) => updateVariant(index, 'mrp', e.target.value)} placeholder="140" />
+                  <Input type="number" value={variant.mrp} onChange={(e) => updateVariant(index, 'mrp', e.target.value)} placeholder="140" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
                 <div className="space-y-1">
                   <Label className="text-xs">Stock</Label>
-                  <Input type="number" value={variant.stock} onChange={(e) => updateVariant(index, 'stock', e.target.value)} placeholder="100" />
+                  <Input type="number" value={variant.stock} onChange={(e) => updateVariant(index, 'stock', e.target.value)} placeholder="100" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
               </div>
             </div>
@@ -169,18 +167,18 @@ export default function AdminAddProduct() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label>Meta Title</Label>
-            <Input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} placeholder="Custom meta title" />
+            <Input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} placeholder="Custom meta title" className="focus:ring-emerald-500 focus:border-emerald-500" />
           </div>
           <div className="space-y-2">
             <Label>Meta Description</Label>
-            <Textarea value={metaDesc} onChange={(e) => setMetaDesc(e.target.value)} placeholder="Custom meta description" rows={2} />
+            <Textarea value={metaDesc} onChange={(e) => setMetaDesc(e.target.value)} placeholder="Custom meta description" rows={2} className="focus:ring-emerald-500 focus:border-emerald-500" />
           </div>
         </CardContent>
       </Card>
 
       <div className="flex items-center gap-3 justify-end">
         <Button variant="outline" onClick={() => setView('admin-products')}>Cancel</Button>
-        <Button className="bg-amber-500 hover:bg-amber-600">
+        <Button className="bg-emerald-600 hover:bg-emerald-700">
           <Save className="h-4 w-4 mr-2" /> {isEdit ? 'Update Product' : 'Save Product'}
         </Button>
       </div>

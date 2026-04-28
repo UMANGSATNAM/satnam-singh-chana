@@ -14,6 +14,11 @@ import {
   TrendingUp,
   ArrowUpRight,
   ArrowDownRight,
+  Plus,
+  Tag,
+  Eye,
+  Image,
+  Clock,
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
@@ -49,15 +54,31 @@ const mockDashboard: DashboardStats = {
 
 const formatPrice = (amount: number) => `₹${amount.toLocaleString('en-IN')}`;
 
+const recentActivity = [
+  { id: 1, text: 'New order #SSC-2024-012 placed by Rahul Sharma', time: '2 min ago', type: 'order' as const },
+  { id: 2, text: 'Payment received for order #SSC-2024-011', time: '15 min ago', type: 'payment' as const },
+  { id: 3, text: 'Order #SSC-2024-009 shipped via Delhivery', time: '1 hour ago', type: 'shipped' as const },
+  { id: 4, text: 'New customer Meera Nair registered', time: '2 hours ago', type: 'customer' as const },
+  { id: 5, text: 'Return request for order #SSC-2024-006', time: '3 hours ago', type: 'return' as const },
+  { id: 6, text: 'Promo code SAVE20 used 5 times today', time: '5 hours ago', type: 'promo' as const },
+];
+
 export default function AdminDashboard() {
   const setView = useStore((s) => s.setView);
   const d = mockDashboard;
 
   const stats = [
     { title: "Today's Revenue", value: formatPrice(d.revenueToday), icon: DollarSign, trend: '+12%', up: true, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-    { title: "Today's Orders", value: d.totalOrdersToday, icon: ShoppingBag, trend: '+8%', up: true, color: 'text-amber-600', bg: 'bg-amber-50' },
-    { title: 'Total Customers', value: d.totalCustomers, icon: Users, trend: '+15%', up: true, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { title: 'Monthly Revenue', value: formatPrice(d.revenueMonth), icon: TrendingUp, trend: '+22%', up: true, color: 'text-purple-600', bg: 'bg-purple-50' },
+    { title: "Today's Orders", value: d.totalOrdersToday, icon: ShoppingBag, trend: '+8%', up: true, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { title: 'Total Customers', value: d.totalCustomers, icon: Users, trend: '+15%', up: true, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { title: 'Monthly Revenue', value: formatPrice(d.revenueMonth), icon: TrendingUp, trend: '+22%', up: true, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+  ];
+
+  const quickActions = [
+    { label: 'Add Product', icon: Plus, view: 'admin-add-product' as const, color: 'bg-emerald-600 hover:bg-emerald-700' },
+    { label: 'Create Promo', icon: Tag, view: 'admin-promo-codes' as const, color: 'bg-emerald-600 hover:bg-emerald-700' },
+    { label: 'View Orders', icon: Eye, view: 'admin-orders' as const, color: 'bg-emerald-600 hover:bg-emerald-700' },
+    { label: 'Update Banner', icon: Image, view: 'admin-banners' as const, color: 'bg-emerald-600 hover:bg-emerald-700' },
   ];
 
   return (
@@ -95,6 +116,30 @@ export default function AdminDashboard() {
         })}
       </div>
 
+      {/* Quick Actions */}
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base font-semibold">Quick Actions</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {quickActions.map((action) => {
+              const Icon = action.icon;
+              return (
+                <Button
+                  key={action.label}
+                  onClick={() => setView(action.view)}
+                  className={`${action.color} text-white flex items-center gap-2 h-auto py-3`}
+                >
+                  <Icon className="h-4 w-4" />
+                  <span className="text-sm">{action.label}</span>
+                </Button>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Revenue Chart */}
@@ -102,7 +147,7 @@ export default function AdminDashboard() {
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base font-semibold">Revenue Overview</CardTitle>
-              <Badge variant="secondary" className="text-xs">Last 7 days</Badge>
+              <Badge variant="secondary" className="text-xs bg-emerald-50 text-emerald-700">Last 7 days</Badge>
             </div>
           </CardHeader>
           <CardContent>
@@ -116,7 +161,7 @@ export default function AdminDashboard() {
                     formatter={(value: number) => [formatPrice(value), 'Revenue']}
                     contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb' }}
                   />
-                  <Line type="monotone" dataKey="revenue" stroke="#f59e0b" strokeWidth={2.5} dot={{ fill: '#f59e0b', r: 4 }} />
+                  <Line type="monotone" dataKey="revenue" stroke="#059669" strokeWidth={2.5} dot={{ fill: '#059669', r: 4 }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -136,7 +181,7 @@ export default function AdminDashboard() {
                   <XAxis dataKey="label" stroke="#94a3b8" fontSize={12} />
                   <YAxis stroke="#94a3b8" fontSize={12} />
                   <Tooltip contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb' }} />
-                  <Bar dataKey="orders" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="orders" fill="#059669" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -151,7 +196,7 @@ export default function AdminDashboard() {
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base font-semibold">Top Selling Products</CardTitle>
-              <Button variant="ghost" size="sm" onClick={() => setView('admin-products')} className="text-amber-600">
+              <Button variant="ghost" size="sm" onClick={() => setView('admin-products')} className="text-emerald-600 hover:text-emerald-700">
                 View All
               </Button>
             </div>
@@ -161,7 +206,7 @@ export default function AdminDashboard() {
               {d.topSellingProducts.map((product, i) => (
                 <div key={product.name} className="flex items-center justify-between py-2">
                   <div className="flex items-center gap-3">
-                    <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">
+                    <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">
                       {i + 1}
                     </span>
                     <div>
@@ -169,69 +214,93 @@ export default function AdminDashboard() {
                       <p className="text-xs text-gray-500">{product.orders} orders</p>
                     </div>
                   </div>
-                  <span className="text-sm font-semibold text-gray-900">{formatPrice(product.revenue)}</span>
+                  <span className="text-sm font-semibold text-emerald-600">{formatPrice(product.revenue)}</span>
                 </div>
               ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Alerts */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base font-semibold">Alerts & Actions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {d.pendingOrders > 0 && (
-                <div className="flex items-center gap-3 p-3 bg-amber-50 rounded-lg border border-amber-100">
-                  <ShoppingBag className="h-5 w-5 text-amber-600" />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-amber-900">{d.pendingOrders} Pending Orders</p>
-                    <p className="text-xs text-amber-600">Awaiting confirmation</p>
+        {/* Alerts & Recent Activity */}
+        <div className="space-y-6">
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold">Alerts & Actions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {d.pendingOrders > 0 && (
+                  <div className="flex items-center gap-3 p-3 bg-emerald-50 rounded-lg border border-emerald-100">
+                    <ShoppingBag className="h-5 w-5 text-emerald-600" />
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-emerald-900">{d.pendingOrders} Pending Orders</p>
+                      <p className="text-xs text-emerald-600">Awaiting confirmation</p>
+                    </div>
+                    <Button size="sm" variant="outline" onClick={() => setView('admin-orders')} className="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
+                      View
+                    </Button>
                   </div>
-                  <Button size="sm" variant="outline" onClick={() => setView('admin-orders')} className="border-amber-300 text-amber-700">
+                )}
+                {d.pendingReturns > 0 && (
+                  <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                    <Package className="h-5 w-5 text-red-600" />
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-red-900">{d.pendingReturns} Return Requests</p>
+                      <p className="text-xs text-red-600">Awaiting review</p>
+                    </div>
+                    <Button size="sm" variant="outline" onClick={() => setView('admin-orders')} className="border-red-300 text-red-700 hover:bg-red-50">
+                      View
+                    </Button>
+                  </div>
+                )}
+                {d.lowStockProducts > 0 && (
+                  <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                    <AlertTriangle className="h-5 w-5 text-red-600" />
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-red-900">{d.lowStockProducts} Low Stock Items</p>
+                      <p className="text-xs text-red-600">Below threshold</p>
+                    </div>
+                    <Button size="sm" variant="outline" onClick={() => setView('admin-products')} className="border-red-300 text-red-700 hover:bg-red-50">
+                      View
+                    </Button>
+                  </div>
+                )}
+                <div className="flex items-center gap-3 p-3 bg-emerald-50 rounded-lg border border-emerald-100">
+                  <TrendingUp className="h-5 w-5 text-emerald-600" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-emerald-900">+{d.newCustomersThisMonth} New Customers</p>
+                    <p className="text-xs text-emerald-600">This month</p>
+                  </div>
+                  <Button size="sm" variant="outline" onClick={() => setView('admin-customers')} className="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
                     View
                   </Button>
                 </div>
-              )}
-              {d.pendingReturns > 0 && (
-                <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg border border-orange-100">
-                  <Package className="h-5 w-5 text-orange-600" />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-orange-900">{d.pendingReturns} Return Requests</p>
-                    <p className="text-xs text-orange-600">Awaiting review</p>
-                  </div>
-                  <Button size="sm" variant="outline" onClick={() => setView('admin-orders')} className="border-orange-300 text-orange-700">
-                    View
-                  </Button>
-                </div>
-              )}
-              {d.lowStockProducts > 0 && (
-                <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
-                  <AlertTriangle className="h-5 w-5 text-red-600" />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-red-900">{d.lowStockProducts} Low Stock Items</p>
-                    <p className="text-xs text-red-600">Below threshold</p>
-                  </div>
-                  <Button size="sm" variant="outline" onClick={() => setView('admin-products')} className="border-red-300 text-red-700">
-                    View
-                  </Button>
-                </div>
-              )}
-              <div className="flex items-center gap-3 p-3 bg-emerald-50 rounded-lg border border-emerald-100">
-                <TrendingUp className="h-5 w-5 text-emerald-600" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-emerald-900">+{d.newCustomersThisMonth} New Customers</p>
-                  <p className="text-xs text-emerald-600">This month</p>
-                </div>
-                <Button size="sm" variant="outline" onClick={() => setView('admin-customers')} className="border-emerald-300 text-emerald-700">
-                  View
-                </Button>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+
+          {/* Recent Activity Feed */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold">Recent Activity</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3 max-h-64 overflow-y-auto">
+                {recentActivity.map((activity) => (
+                  <div key={activity.id} className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-gray-700 truncate">{activity.text}</p>
+                      <p className="text-xs text-gray-400 flex items-center gap-1">
+                        <Clock className="h-3 w-3" /> {activity.time}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

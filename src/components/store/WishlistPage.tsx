@@ -26,7 +26,7 @@ export default function WishlistPage() {
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Your wishlist is empty</h2>
         <p className="text-gray-500 mb-6">Save your favorite snacks for later!</p>
         <Button
-          className="bg-amber-500 hover:bg-amber-600 text-white"
+          className="bg-emerald-600 hover:bg-emerald-700 text-white"
           onClick={() => setView('products')}
         >
           <ShoppingBag className="mr-2 h-4 w-4" />

@@ -34,7 +34,7 @@ export default function AdminPromoCodes() {
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-amber-500 hover:bg-amber-600">
+            <Button className="bg-emerald-600 hover:bg-emerald-700">
               <Plus className="h-4 w-4 mr-2" /> Create Promo Code
             </Button>
           </DialogTrigger>
@@ -45,13 +45,13 @@ export default function AdminPromoCodes() {
             <div className="space-y-4 pt-2">
               <div className="space-y-2">
                 <Label>Promo Code</Label>
-                <Input value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} placeholder="e.g., SAVE20" />
+                <Input value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} placeholder="e.g., SAVE20" className="focus:ring-emerald-500 focus:border-emerald-500" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Type</Label>
                   <Select value={type} onValueChange={setType}>
-                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectTrigger className="focus:ring-emerald-500"><SelectValue /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="flat">Flat (₹)</SelectItem>
                       <SelectItem value="percentage">Percentage (%)</SelectItem>
@@ -60,37 +60,37 @@ export default function AdminPromoCodes() {
                 </div>
                 <div className="space-y-2">
                   <Label>Value</Label>
-                  <Input type="number" value={value} onChange={(e) => setValue(e.target.value)} placeholder={type === 'flat' ? '100' : '20'} />
+                  <Input type="number" value={value} onChange={(e) => setValue(e.target.value)} placeholder={type === 'flat' ? '100' : '20'} className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Min Order Value (₹)</Label>
-                  <Input type="number" value={minOrder} onChange={(e) => setMinOrder(e.target.value)} placeholder="200" />
+                  <Input type="number" value={minOrder} onChange={(e) => setMinOrder(e.target.value)} placeholder="200" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
                 <div className="space-y-2">
                   <Label>Max Discount (₹)</Label>
-                  <Input type="number" placeholder="For % codes" />
+                  <Input type="number" placeholder="For % codes" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Total Usage Limit</Label>
-                  <Input type="number" placeholder="1000" />
+                  <Input type="number" placeholder="1000" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
                 <div className="space-y-2">
                   <Label>Per User Limit</Label>
-                  <Input type="number" placeholder="1" />
+                  <Input type="number" placeholder="1" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Valid From</Label>
-                  <Input type="date" />
+                  <Input type="date" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
                 <div className="space-y-2">
                   <Label>Valid Until</Label>
-                  <Input type="date" />
+                  <Input type="date" className="focus:ring-emerald-500 focus:border-emerald-500" />
                 </div>
               </div>
               <div className="space-y-3">
@@ -107,7 +107,7 @@ export default function AdminPromoCodes() {
                   <Switch />
                 </div>
               </div>
-              <Button className="w-full bg-amber-500 hover:bg-amber-600" onClick={() => setDialogOpen(false)}>
+              <Button className="w-full bg-emerald-600 hover:bg-emerald-700" onClick={() => setDialogOpen(false)}>
                 Create Promo Code
               </Button>
             </div>
@@ -119,36 +119,36 @@ export default function AdminPromoCodes() {
         <CardContent className="p-0">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>Code</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Value</TableHead>
-                <TableHead>Min Order</TableHead>
-                <TableHead>Usage</TableHead>
-                <TableHead>Valid Until</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="w-20">Actions</TableHead>
+              <TableRow className="bg-emerald-50">
+                <TableHead className="text-emerald-700">Code</TableHead>
+                <TableHead className="text-emerald-700">Type</TableHead>
+                <TableHead className="text-emerald-700">Value</TableHead>
+                <TableHead className="text-emerald-700">Min Order</TableHead>
+                <TableHead className="text-emerald-700">Usage</TableHead>
+                <TableHead className="text-emerald-700">Valid Until</TableHead>
+                <TableHead className="text-emerald-700">Status</TableHead>
+                <TableHead className="w-20 text-emerald-700">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {mockPromos.map((promo) => (
-                <TableRow key={promo.id}>
+                <TableRow key={promo.id} className="hover:bg-emerald-50/50">
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Tag className="h-4 w-4 text-amber-500" />
+                      <Tag className="h-4 w-4 text-emerald-600" />
                       <span className="font-mono font-bold text-sm">{promo.code}</span>
                     </div>
                   </TableCell>
                   <TableCell className="text-sm capitalize">{promo.type}</TableCell>
-                  <TableCell className="text-sm font-medium">
+                  <TableCell className="text-sm font-medium text-emerald-600">
                     {promo.type === 'flat' ? `₹${promo.value}` : `${promo.value}%`}
                     {promo.maxDiscount && <span className="text-xs text-gray-500 block">Max ₹{promo.maxDiscount}</span>}
                   </TableCell>
                   <TableCell className="text-sm">₹{promo.minOrder}</TableCell>
                   <TableCell className="text-sm">
                     <span>{promo.usedCount}/{promo.usageLimit}</span>
-                    <div className="w-full bg-gray-200 rounded-full h-1 mt-1">
-                      <div className="bg-amber-500 h-1 rounded-full" style={{ width: `${(promo.usedCount / (promo.usageLimit || 1)) * 100}%` }} />
+                    <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+                      <div className="bg-emerald-600 h-1.5 rounded-full" style={{ width: `${(promo.usedCount / (promo.usageLimit || 1)) * 100}%` }} />
                     </div>
                   </TableCell>
                   <TableCell className="text-sm">{promo.validUntil}</TableCell>
@@ -159,7 +159,7 @@ export default function AdminPromoCodes() {
                   </TableCell>
                   <TableCell>
                     <div className="flex gap-1">
-                      <Button variant="ghost" size="icon" className="h-7 w-7"><Edit className="h-3.5 w-3.5" /></Button>
+                      <Button variant="ghost" size="icon" className="h-7 w-7 text-emerald-600 hover:text-emerald-700"><Edit className="h-3.5 w-3.5" /></Button>
                       <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500"><Trash2 className="h-3.5 w-3.5" /></Button>
                     </div>
                   </TableCell>

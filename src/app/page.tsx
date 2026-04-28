@@ -43,11 +43,14 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-amber-50/50">
+      <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-amber-700 font-medium text-lg">Loading Satnam Singh Chana...</p>
-          <p className="text-amber-600/60 text-sm mt-1">Premium Roasted Snacks</p>
+          <div className="w-20 h-20 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto mb-6" />
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-500/30">
+            <span className="text-white font-bold text-lg">SS</span>
+          </div>
+          <p className="text-emerald-400 font-semibold text-xl tracking-wide">Satnam Singh Chana</p>
+          <p className="text-emerald-500/50 text-sm mt-1">Premium Roasted Snacks</p>
         </div>
       </div>
     );

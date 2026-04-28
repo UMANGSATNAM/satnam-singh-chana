@@ -39,7 +39,7 @@ export default function AdminHomepage() {
                   <Button variant="ghost" size="icon" className="h-6 w-6"><ArrowUp className="h-3.5 w-3.5" /></Button>
                   <Button variant="ghost" size="icon" className="h-6 w-6"><ArrowDown className="h-3.5 w-3.5" /></Button>
                 </div>
-                <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700">
+                <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-700">
                   {typeIcons[section.type] || <Layout className="h-4 w-4" />}
                 </div>
                 <div className="flex-1">

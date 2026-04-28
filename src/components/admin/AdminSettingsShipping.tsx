@@ -137,7 +137,7 @@ export default function AdminSettingsShipping() {
       </Card>
 
       <div className="flex justify-end">
-        <Button className="bg-amber-500 hover:bg-amber-600">
+        <Button className="bg-emerald-600 hover:bg-emerald-700">
           <Save className="h-4 w-4 mr-2" /> Save Shipping Settings
         </Button>
       </div>

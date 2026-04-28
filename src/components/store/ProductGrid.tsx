@@ -33,7 +33,7 @@ export default function ProductGrid() {
       </div>
 
       {/* Filter bar */}
-      <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-amber-50/50 rounded-xl border border-amber-100">
+      <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-emerald-50/50 rounded-xl border border-emerald-100">
         {/* Category tabs */}
         <div className="flex gap-1">
           {[
@@ -48,8 +48,8 @@ export default function ProductGrid() {
               onClick={() => setFilters({ category: cat.value })}
               className={
                 filters.category === cat.value
-                  ? 'bg-amber-500 hover:bg-amber-600 text-white border-amber-500'
-                  : 'border-amber-200 text-amber-700 hover:bg-amber-100'
+                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-600'
+                  : 'border-emerald-200 text-emerald-700 hover:bg-emerald-100'
               }
             >
               {cat.label}
@@ -57,14 +57,14 @@ export default function ProductGrid() {
           ))}
         </div>
 
-        <div className="h-6 w-px bg-amber-200 hidden sm:block" />
+        <div className="h-6 w-px bg-emerald-200 hidden sm:block" />
 
         {/* Weight filter */}
         <Select
           value={filters.weight || '__all__'}
           onValueChange={(val) => setFilters({ weight: val === '__all__' ? undefined : val })}
         >
-          <SelectTrigger className="w-[120px] h-8 text-xs border-amber-200">
+          <SelectTrigger className="w-[120px] h-8 text-xs border-emerald-200">
             <SelectValue placeholder="Weight" />
           </SelectTrigger>
           <SelectContent>
@@ -79,7 +79,7 @@ export default function ProductGrid() {
           value={filters.badge || '__all__'}
           onValueChange={(val) => setFilters({ badge: val === '__all__' ? undefined : val })}
         >
-          <SelectTrigger className="w-[130px] h-8 text-xs border-amber-200">
+          <SelectTrigger className="w-[130px] h-8 text-xs border-emerald-200">
             <SelectValue placeholder="Badge" />
           </SelectTrigger>
           <SelectContent>
@@ -96,7 +96,7 @@ export default function ProductGrid() {
           value={filters.sortBy || '__default__'}
           onValueChange={(val) => setFilters({ sortBy: val === '__default__' ? undefined : val as 'price_asc' | 'price_desc' | 'name' | 'newest' })}
         >
-          <SelectTrigger className="w-[140px] h-8 text-xs border-amber-200">
+          <SelectTrigger className="w-[140px] h-8 text-xs border-emerald-200">
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent>
@@ -114,7 +114,7 @@ export default function ProductGrid() {
             variant="ghost"
             size="sm"
             onClick={clearFilters}
-            className="text-amber-600 hover:text-amber-700 hover:bg-amber-100 text-xs"
+            className="text-emerald-600 hover:text-emerald-700 hover:bg-emerald-100 text-xs"
           >
             <X className="h-3 w-3 mr-1" />
             Clear ({activeFiltersCount})
@@ -128,7 +128,7 @@ export default function ProductGrid() {
           <span className="text-6xl mb-4 block">🔍</span>
           <h2 className="text-xl font-semibold text-gray-700 mb-2">No products found</h2>
           <p className="text-gray-500 mb-4">Try adjusting your filters or search terms</p>
-          <Button onClick={clearFilters} variant="outline" className="border-amber-300 text-amber-700 hover:bg-amber-50">
+          <Button onClick={clearFilters} variant="outline" className="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
             Clear all filters
           </Button>
         </div>

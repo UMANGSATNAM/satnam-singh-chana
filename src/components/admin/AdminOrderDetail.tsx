@@ -9,15 +9,16 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, Package, MapPin, CreditCard, Truck } from 'lucide-react';
+import { useState } from 'react';
 
 const statusColors: Record<string, string> = {
   placed: 'bg-gray-100 text-gray-700',
-  confirmed: 'bg-blue-100 text-blue-700',
+  confirmed: 'bg-emerald-100 text-emerald-700',
   packed: 'bg-yellow-100 text-yellow-700',
   shipped: 'bg-purple-100 text-purple-700',
   delivered: 'bg-emerald-100 text-emerald-700',
   cancelled: 'bg-red-100 text-red-700',
-  returned: 'bg-orange-100 text-orange-700',
+  returned: 'bg-green-100 text-green-700',
 };
 
 const statusFlow = ['placed', 'confirmed', 'packed', 'shipped', 'delivered'];
@@ -72,15 +73,15 @@ export default function AdminOrderDetail() {
             {statusFlow.map((s, i) => (
               <div key={s} className="flex items-center">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
-                  i <= currentStatusIndex ? 'bg-amber-500 text-white' : 'bg-gray-200 text-gray-500'
+                  i <= currentStatusIndex ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-500'
                 }`}>
                   {i + 1}
                 </div>
-                <span className={`ml-2 text-xs font-medium ${i <= currentStatusIndex ? 'text-amber-700' : 'text-gray-400'}`}>
+                <span className={`ml-2 text-xs font-medium ${i <= currentStatusIndex ? 'text-emerald-700' : 'text-gray-400'}`}>
                   {s.charAt(0).toUpperCase() + s.slice(1)}
                 </span>
                 {i < statusFlow.length - 1 && (
-                  <div className={`w-12 h-0.5 mx-2 ${i < currentStatusIndex ? 'bg-amber-500' : 'bg-gray-200'}`} />
+                  <div className={`w-12 h-0.5 mx-2 ${i < currentStatusIndex ? 'bg-emerald-600' : 'bg-gray-200'}`} />
                 )}
               </div>
             ))}
@@ -93,14 +94,14 @@ export default function AdminOrderDetail() {
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <Package className="h-4 w-4" /> Update Order
+              <Package className="h-4 w-4 text-emerald-600" /> Update Order
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label>Update Status</Label>
               <Select value={newStatus} onValueChange={setNewStatus}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger className="focus:ring-emerald-500 focus:border-emerald-500"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="confirmed">Confirmed</SelectItem>
                   <SelectItem value="packed">Packed</SelectItem>
@@ -112,12 +113,12 @@ export default function AdminOrderDetail() {
             </div>
             <div className="space-y-2">
               <Label>Tracking Number</Label>
-              <Input value={tracking} onChange={(e) => setTracking(e.target.value)} placeholder="AWB / Tracking #" />
+              <Input value={tracking} onChange={(e) => setTracking(e.target.value)} placeholder="AWB / Tracking #" className="focus:ring-emerald-500 focus:border-emerald-500" />
             </div>
             <div className="space-y-2">
               <Label>Delivery Partner</Label>
               <Select value={partner} onValueChange={setPartner}>
-                <SelectTrigger><SelectValue placeholder="Select partner" /></SelectTrigger>
+                <SelectTrigger className="focus:ring-emerald-500 focus:border-emerald-500"><SelectValue placeholder="Select partner" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="shiprocket">Shiprocket</SelectItem>
                   <SelectItem value="delhivery">Delhivery</SelectItem>
@@ -126,7 +127,7 @@ export default function AdminOrderDetail() {
                 </SelectContent>
               </Select>
             </div>
-            <Button className="w-full bg-amber-500 hover:bg-amber-600">Update Order</Button>
+            <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Update Order</Button>
           </CardContent>
         </Card>
 
@@ -134,7 +135,7 @@ export default function AdminOrderDetail() {
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <MapPin className="h-4 w-4" /> Delivery Address
+              <MapPin className="h-4 w-4 text-emerald-600" /> Delivery Address
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -164,7 +165,7 @@ export default function AdminOrderDetail() {
             {order.items.map((item, i) => (
               <div key={i} className="flex items-center justify-between py-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-700 font-bold text-sm">
+                  <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-700 font-bold text-sm">
                     {item.name.charAt(0)}
                   </div>
                   <div>
@@ -172,7 +173,7 @@ export default function AdminOrderDetail() {
                     <p className="text-xs text-gray-500">{item.weight} × {item.qty}</p>
                   </div>
                 </div>
-                <span className="text-sm font-medium">₹{item.price * item.qty}</span>
+                <span className="text-sm font-medium text-emerald-600">₹{item.price * item.qty}</span>
               </div>
             ))}
           </div>
@@ -183,7 +184,7 @@ export default function AdminOrderDetail() {
             {order.discount > 0 && <div className="flex justify-between text-emerald-600"><span>Discount</span><span>-₹{order.discount}</span></div>}
             {order.codFee > 0 && <div className="flex justify-between"><span className="text-gray-500">COD Fee</span><span>₹{order.codFee}</span></div>}
             <Separator />
-            <div className="flex justify-between font-semibold text-base"><span>Total</span><span>₹{order.total}</span></div>
+            <div className="flex justify-between font-semibold text-base"><span>Total</span><span className="text-emerald-600">₹{order.total}</span></div>
           </div>
         </CardContent>
       </Card>
@@ -192,7 +193,7 @@ export default function AdminOrderDetail() {
       <Card>
         <CardHeader>
           <CardTitle className="text-base flex items-center gap-2">
-            <CreditCard className="h-4 w-4" /> Payment Information
+            <CreditCard className="h-4 w-4 text-emerald-600" /> Payment Information
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -213,5 +214,3 @@ export default function AdminOrderDetail() {
     </div>
   );
 }
-
-import { useState } from 'react';
