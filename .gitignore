@@ -69,3 +69,16 @@ server.log
 
 # Skills directory
 /skills/
+
+# Z-scripts / Z-ai
+.zscripts/
+.z-ai-config/
+
+# Caddy config (local only)
+Caddyfile
+
+# Mini services (local dev only)
+/mini-services/
+
+# Worklog (local only)
+worklog.md
