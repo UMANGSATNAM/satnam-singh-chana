@@ -76,8 +76,8 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
-# Install prisma CLI in runner for migrations
-RUN npm install -g prisma
+# Install prisma CLI in runner for migrations (pinned to v6 to match package.json)
+RUN npm install -g prisma@6
 
 # Change ownership
 RUN chown -R nextjs:nodejs /app
