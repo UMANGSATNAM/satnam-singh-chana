@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -22,7 +21,6 @@ import {
   Minus,
   Plus,
   Star,
-  ChevronRight,
   Truck,
   RotateCcw,
   ShieldCheck,
@@ -31,6 +29,7 @@ import {
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 import ProductCard from './ProductCard';
+import { getProductEmoji, getCategoryGradient, badgeColors } from '@/lib/product-display';
 import type { Product } from '@/types';
 
 export default function ProductDetail() {
@@ -56,6 +55,8 @@ export default function ProductDetail() {
   const discount = getDiscountPercent(variant.mrp, variant.price);
   const saveAmount = variant.mrp - variant.price;
   const isWishlisted = wishlist.includes(product.id);
+  const emoji = getProductEmoji(product.slug, product.categorySlug);
+  const gradient = getCategoryGradient(product.categorySlug);
 
   const relatedProducts = products.filter(
     (p) => product.relatedProducts.includes(p.id) || (p.categorySlug === product.categorySlug && p.id !== product.id)
@@ -78,29 +79,6 @@ export default function ProductDetail() {
 
     toast.success(`Added ${quantity}× ${product.name} (${variant.weight}) to cart`);
     setQuantity(1);
-  };
-
-  const productImages: Record<string, string> = {
-    'khari-sing': '/products/khari-sing.png',
-    'masala-sing': '/products/masala-sing.png',
-    'mori-sing': '/products/mori-sing.png',
-    'khara-chana': '/products/khara-chana.png',
-    'masala-chana': '/products/masala-chana.png',
-    'mora-chana': '/products/mora-chana.png',
-  };
-
-  const categoryEmojis: Record<string, string> = {
-    sing: '🥜',
-    chana: '🌰',
-  };
-
-  const productImage = productImages[product.slug];
-
-  const badgeColors: Record<string, string> = {
-    'Best Seller': 'bg-green-500 text-white',
-    'New': 'bg-blue-500 text-white',
-    'Sale': 'bg-red-500 text-white',
-    'Limited': 'bg-purple-500 text-white',
   };
 
   return (
@@ -145,31 +123,54 @@ export default function ProductDetail() {
 
       {/* Product Detail */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
-        {/* Image area */}
+        {/* Emoji display area */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="relative"
         >
-          <div className="aspect-square bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl overflow-hidden border border-emerald-100 relative">
-            {productImage ? (
-              <img
-                src={productImage}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="flex items-center justify-center h-full">
-                <span className="text-[120px] sm:text-[160px] opacity-50">
-                  {categoryEmojis[product.categorySlug] || '🥜'}
-                </span>
-              </div>
-            )}
+          <div className={`aspect-square bg-gradient-to-br ${gradient} rounded-2xl overflow-hidden border border-emerald-100 relative`}>
+            {/* Decorative elements */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/15 blur-xl" />
+            <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-white/10 blur-xl" />
+            <div className="absolute top-1/4 right-1/4 w-16 h-16 rounded-full bg-white/5 blur-lg" />
+
+            {/* Large emoji */}
+            <div className="flex items-center justify-center h-full">
+              <span className="text-[100px] sm:text-[130px] md:text-[160px] opacity-70 select-none">
+                {emoji}
+              </span>
+            </div>
+
+            {/* Badge */}
             {product.badge && (
-              <Badge className={`absolute top-4 left-4 text-sm font-semibold ${badgeColors[product.badge] || 'bg-gray-500 text-white'}`}>
+              <Badge className={`absolute top-4 left-4 text-sm font-semibold px-3 py-1 rounded-lg ${badgeColors[product.badge] || 'bg-gray-500 text-white'}`}>
                 {product.badge}
               </Badge>
             )}
+
+            {/* Discount badge */}
+            {discount > 0 && (
+              <Badge className="absolute top-4 right-4 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-lg border-0">
+                {discount}% OFF
+              </Badge>
+            )}
+
+            {/* Wishlist button */}
+            <button
+              onClick={() => {
+                toggleWishlist(product.id);
+                toast.success(isWishlisted ? 'Removed from wishlist' : 'Added to wishlist');
+              }}
+              className="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center transition-all hover:scale-110 backdrop-blur-sm"
+              aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+            >
+              <Heart
+                className={`h-5 w-5 transition-colors ${
+                  isWishlisted ? 'fill-rose-500 text-rose-500' : 'text-gray-400'
+                }`}
+              />
+            </button>
           </div>
         </motion.div>
 
@@ -235,7 +236,7 @@ export default function ProductDetail() {
                   <span className="text-sm font-semibold">{v.weight}</span>
                   <span className="block text-xs text-gray-500 mt-0.5">{formatPrice(v.price)}</span>
                   {v.weight === '500g' && (
-                    <Badge className="absolute -top-2 -right-2 bg-green-500 text-white text-[9px] h-4 px-1.5 border-0">
+                    <Badge className="absolute -top-2 -right-2 bg-green-600 text-white text-[9px] h-4 px-1.5 border-0">
                       Best Value
                     </Badge>
                   )}
@@ -254,7 +255,7 @@ export default function ProductDetail() {
             </div>
             {discount > 0 && (
               <div className="flex items-center gap-3 text-sm">
-                <span className="text-green-600 font-semibold">{discount}% OFF</span>
+                <span className="text-green-600 font-semibold bg-green-100 px-2 py-0.5 rounded-md">{discount}% OFF</span>
                 <span className="text-green-600">You save {formatPrice(saveAmount)}</span>
               </div>
             )}
@@ -286,7 +287,7 @@ export default function ProductDetail() {
             </div>
 
             <Button
-              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-11"
+              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-11 rounded-lg"
               onClick={handleAddToCart}
               disabled={variant.stock === 0}
             >
@@ -314,17 +315,17 @@ export default function ProductDetail() {
 
           {/* Trust badges */}
           <div className="grid grid-cols-3 gap-2">
-            <div className="flex flex-col items-center gap-1 p-2 rounded-lg bg-gray-50">
+            <div className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
               <Truck className="h-5 w-5 text-emerald-600" />
-              <span className="text-[10px] text-gray-600 text-center">Free Shipping 500+</span>
+              <span className="text-[10px] text-gray-600 text-center font-medium">Free Shipping ₹500+</span>
             </div>
-            <div className="flex flex-col items-center gap-1 p-2 rounded-lg bg-gray-50">
+            <div className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
               <RotateCcw className="h-5 w-5 text-emerald-600" />
-              <span className="text-[10px] text-gray-600 text-center">7-Day Returns</span>
+              <span className="text-[10px] text-gray-600 text-center font-medium">7-Day Returns</span>
             </div>
-            <div className="flex flex-col items-center gap-1 p-2 rounded-lg bg-gray-50">
+            <div className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
               <ShieldCheck className="h-5 w-5 text-emerald-600" />
-              <span className="text-[10px] text-gray-600 text-center">100% Authentic</span>
+              <span className="text-[10px] text-gray-600 text-center font-medium">100% Authentic</span>
             </div>
           </div>
 
@@ -354,7 +355,7 @@ export default function ProductDetail() {
       {relatedProducts.length > 0 && (
         <section className="mt-10">
           <h2 className="text-xl font-bold text-gray-900 mb-4">You May Also Like</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {relatedProducts.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}

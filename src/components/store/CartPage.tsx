@@ -10,6 +10,7 @@ import { Minus, Plus, X, ShoppingBag, Tag, Truck, ArrowLeft, ArrowRight } from '
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { getProductEmoji } from '@/lib/product-display';
 
 export default function CartPage() {
   const {
@@ -59,7 +60,7 @@ export default function CartPage() {
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
         <p className="text-gray-500 mb-6">Looks like you haven&apos;t added any snacks yet!</p>
         <Button
-          className="bg-emerald-600 hover:bg-emerald-700 text-white"
+          className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg"
           onClick={() => setView('products')}
         >
           <ShoppingBag className="mr-2 h-4 w-4" />
@@ -105,7 +106,7 @@ export default function CartPage() {
                   <CardContent className="p-4">
                     <div className="flex gap-4">
                       <div className="w-20 h-20 bg-gradient-to-br from-emerald-100 to-green-100 rounded-xl flex items-center justify-center shrink-0">
-                        <span className="text-3xl">🥜</span>
+                        <span className="text-3xl">{getProductEmoji(item.productSlug)}</span>
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between">
@@ -236,7 +237,7 @@ export default function CartPage() {
               )}
 
               <Button
-                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-11"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-11 rounded-lg"
                 onClick={() => setView('checkout')}
               >
                 Proceed to Checkout <ArrowRight className="ml-2 h-4 w-4" />

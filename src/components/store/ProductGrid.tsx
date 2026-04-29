@@ -5,8 +5,18 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import ProductCard from './ProductCard';
-import { SlidersHorizontal, X, LayoutGrid, List } from 'lucide-react';
+import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { categoryNames } from '@/lib/product-display';
+
+const categoryFilters = [
+  { label: 'All', value: undefined, emoji: '' },
+  { label: '🥜 Sing', value: 'sing' },
+  { label: '🌰 Chana', value: 'chana' },
+  { label: '🍿 Mix & Namkeen', value: 'mix-namkeen' },
+  { label: '🌻 Roasted Seeds', value: 'roasted-seeds' },
+  { label: '⭐ Specialty', value: 'specialty' },
+];
 
 export default function ProductGrid() {
   const { filteredProducts, filters, setFilters, clearFilters, searchQuery } = useStore();
@@ -20,12 +30,16 @@ export default function ProductGrid() {
     filters.search,
   ].filter(Boolean).length;
 
+  const categoryLabel = filters.category
+    ? (categoryNames[filters.category] || filters.category)
+    : 'All Products';
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-          {searchQuery ? `Search: "${searchQuery}"` : filters.category ? `${filters.category === 'sing' ? 'Sing' : 'Chana'} Products` : 'All Products'}
+          {searchQuery ? `Search: "${searchQuery}"` : `${categoryLabel} Products`}
         </h1>
         <p className="text-sm text-gray-500 mt-1">
           {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''} found
@@ -35,12 +49,8 @@ export default function ProductGrid() {
       {/* Filter bar */}
       <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-emerald-50/50 rounded-xl border border-emerald-100">
         {/* Category tabs */}
-        <div className="flex gap-1">
-          {[
-            { label: 'All', value: undefined },
-            { label: 'Sing', value: 'sing' },
-            { label: 'Chana', value: 'chana' },
-          ].map((cat) => (
+        <div className="flex flex-wrap gap-1.5">
+          {categoryFilters.map((cat) => (
             <Button
               key={cat.label}
               variant={filters.category === cat.value ? 'default' : 'outline'}
@@ -71,6 +81,7 @@ export default function ProductGrid() {
             <SelectItem value="__all__">All Weights</SelectItem>
             <SelectItem value="250g">250g</SelectItem>
             <SelectItem value="500g">500g</SelectItem>
+            <SelectItem value="1kg">1kg</SelectItem>
           </SelectContent>
         </Select>
 
@@ -87,6 +98,7 @@ export default function ProductGrid() {
             <SelectItem value="Best Seller">Best Seller</SelectItem>
             <SelectItem value="New">New</SelectItem>
             <SelectItem value="Sale">Sale</SelectItem>
+            <SelectItem value="Popular">Popular</SelectItem>
             <SelectItem value="Limited">Limited</SelectItem>
           </SelectContent>
         </Select>
@@ -135,7 +147,7 @@ export default function ProductGrid() {
       ) : (
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
+          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5"
         >
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product) => (

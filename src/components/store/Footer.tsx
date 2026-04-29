@@ -12,6 +12,7 @@ import {
   RotateCcw,
   ShieldCheck,
   CreditCard,
+  MessageCircle,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -23,14 +24,20 @@ interface FooterProps {
 }
 
 export default function Footer({ settings }: FooterProps) {
-  const setView = useStore((s) => s.setView);
+  const { setView, setFilters } = useStore();
 
   const storeName = settings?.storeName || 'Satnam Singh Chana';
   const tagline = settings?.storeTagline || 'Premium Roasted Snacks Since 1965';
   const email = settings?.storeEmail || 'hello@satnamsinghchana.com';
   const phone = settings?.storePhone || '+91 98765 43210';
+  const whatsapp = settings?.storeWhatsapp || '+91 98765 43210';
   const address = settings?.storeAddress || 'Main Market Road, Rajkot, Gujarat 360001';
   const freeShipping = settings?.freeShippingAbove || 500;
+
+  const handleCategoryNav = (category: string) => {
+    setFilters({ category });
+    setView('products');
+  };
 
   return (
     <footer className="mt-auto bg-black text-gray-300">
@@ -66,25 +73,36 @@ export default function Footer({ settings }: FooterProps) {
               <span className="text-white font-bold text-lg">{storeName}</span>
             </div>
             <p className="text-sm text-gray-400 mb-4">{tagline}</p>
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className="text-sm text-gray-400 leading-relaxed mb-5">
               Handcrafted with love in Gujarat. From our family to yours — the finest roasted Sing & Chana snacks since 1965.
             </p>
+            {/* WhatsApp CTA */}
+            <a
+              href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Chat on WhatsApp
+            </a>
           </div>
 
-          {/* Quick Links */}
+          {/* Shop by Category */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-white font-semibold mb-4">Shop by Category</h3>
             <ul className="space-y-2.5">
               {[
-                { label: 'All Products', view: 'products' as const },
-                { label: 'Sing (Peanuts)', view: 'products' as const },
-                { label: 'Chana (Chickpeas)', view: 'products' as const },
-                { label: 'My Orders', view: 'orders' as const },
-                { label: 'Wishlist', view: 'wishlist' as const },
+                { label: 'All Products', action: () => { setFilters({}); setView('products'); } },
+                { label: '🥜 Sing (Peanuts)', action: () => handleCategoryNav('sing') },
+                { label: '🌰 Chana (Chickpeas)', action: () => handleCategoryNav('chana') },
+                { label: '🍿 Mix & Namkeen', action: () => handleCategoryNav('mix-namkeen') },
+                { label: '🌻 Roasted Seeds', action: () => handleCategoryNav('roasted-seeds') },
+                { label: '⭐ Specialty', action: () => handleCategoryNav('specialty') },
               ].map((link) => (
                 <li key={link.label}>
                   <button
-                    onClick={() => setView(link.view)}
+                    onClick={link.action}
                     className="text-sm text-gray-400 hover:text-emerald-400 transition-colors"
                   >
                     {link.label}
@@ -116,6 +134,14 @@ export default function Footer({ settings }: FooterProps) {
               <li>
                 <button className="hover:text-emerald-400 transition-colors">Terms & Conditions</button>
               </li>
+              <li>
+                <button
+                  onClick={() => setView('orders')}
+                  className="hover:text-emerald-400 transition-colors"
+                >
+                  Track My Order
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -131,6 +157,12 @@ export default function Footer({ settings }: FooterProps) {
                 <Phone className="h-4 w-4 shrink-0 text-emerald-500" />
                 <a href={`tel:${phone.replace(/\s/g, '')}`} className="hover:text-emerald-400 transition-colors">
                   {phone}
+                </a>
+              </li>
+              <li className="flex items-center gap-2 text-gray-400">
+                <MessageCircle className="h-4 w-4 shrink-0 text-green-500" />
+                <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
+                  WhatsApp: {whatsapp}
                 </a>
               </li>
               <li className="flex items-center gap-2 text-gray-400">

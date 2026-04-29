@@ -37,6 +37,15 @@ interface HeaderProps {
   settings: StoreSettings | null;
 }
 
+const categoryTabs = [
+  { label: 'All', value: undefined, emoji: '' },
+  { label: 'Sing', value: 'sing', emoji: '🥜' },
+  { label: 'Chana', value: 'chana', emoji: '🌰' },
+  { label: 'Mix & Namkeen', value: 'mix-namkeen', emoji: '🍿' },
+  { label: 'Roasted Seeds', value: 'roasted-seeds', emoji: '🌻' },
+  { label: 'Specialty', value: 'specialty', emoji: '⭐' },
+];
+
 export default function Header({ settings }: HeaderProps) {
   const {
     currentView,
@@ -83,16 +92,16 @@ export default function Header({ settings }: HeaderProps) {
   const tagline = settings?.storeTagline || 'Premium Roasted Snacks';
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-emerald-200/50 bg-white/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60">
+    <header className="sticky top-0 z-50 w-full border-b border-emerald-200/50 bg-white/90 backdrop-blur-md supports-[backdrop-filter]:bg-white/70">
       <div className="max-w-7xl mx-auto px-4">
         {/* Top bar */}
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Logo */}
           <button
             onClick={() => setView('home')}
-            className="flex items-center gap-2 shrink-0 group"
+            className="flex items-center gap-2.5 shrink-0 group"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow group-hover:scale-105">
               <span className="text-white font-bold text-sm">SS</span>
             </div>
             <div className="hidden sm:block">
@@ -111,7 +120,7 @@ export default function Header({ settings }: HeaderProps) {
                 placeholder="Search snacks..."
                 value={localSearch}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="pl-10 bg-emerald-50/50 border-emerald-200/50 focus:border-emerald-400 focus:ring-emerald-400/20 h-10"
+                className="pl-10 bg-emerald-50/50 border-emerald-200/50 focus:border-emerald-400 focus:ring-emerald-400/20 h-10 rounded-lg"
               />
               {localSearch && (
                 <button
@@ -126,11 +135,7 @@ export default function Header({ settings }: HeaderProps) {
 
           {/* Category tabs - Desktop */}
           <div className="hidden lg:flex items-center gap-1">
-            {[
-              { label: 'All', value: undefined },
-              { label: 'Sing', value: 'sing' },
-              { label: 'Chana', value: 'chana' },
-            ].map((cat) => (
+            {categoryTabs.map((cat) => (
               <Button
                 key={cat.label}
                 variant={filters.category === cat.value ? 'default' : 'ghost'}
@@ -138,10 +143,11 @@ export default function Header({ settings }: HeaderProps) {
                 onClick={() => handleCategoryFilter(cat.value)}
                 className={
                   filters.category === cat.value
-                    ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                    ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
                     : 'text-gray-600 hover:text-emerald-700 hover:bg-emerald-50'
                 }
               >
+                {cat.emoji && <span className="mr-1">{cat.emoji}</span>}
                 {cat.label}
               </Button>
             ))}
@@ -287,7 +293,7 @@ export default function Header({ settings }: HeaderProps) {
                   </div>
 
                   {/* Mobile nav links */}
-                  <nav className="flex-1 px-2">
+                  <nav className="flex-1 px-2 overflow-y-auto">
                     <MobileNavItem
                       icon={<Home className="h-5 w-5" />}
                       label="Home"
@@ -300,7 +306,7 @@ export default function Header({ settings }: HeaderProps) {
                       active={currentView === 'products' && !filters.category}
                       onClick={() => { handleCategoryFilter(undefined); }}
                     />
-                    
+
                     <div className="px-3 py-2 mt-2">
                       <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Categories</p>
                     </div>
@@ -315,6 +321,24 @@ export default function Header({ settings }: HeaderProps) {
                       label="Chana (Chickpeas)"
                       active={filters.category === 'chana'}
                       onClick={() => handleCategoryFilter('chana')}
+                    />
+                    <MobileNavItem
+                      icon={<span className="text-lg">🍿</span>}
+                      label="Mix & Namkeen"
+                      active={filters.category === 'mix-namkeen'}
+                      onClick={() => handleCategoryFilter('mix-namkeen')}
+                    />
+                    <MobileNavItem
+                      icon={<span className="text-lg">🌻</span>}
+                      label="Roasted Seeds"
+                      active={filters.category === 'roasted-seeds'}
+                      onClick={() => handleCategoryFilter('roasted-seeds')}
+                    />
+                    <MobileNavItem
+                      icon={<span className="text-lg">⭐</span>}
+                      label="Specialty"
+                      active={filters.category === 'specialty'}
+                      onClick={() => handleCategoryFilter('specialty')}
                     />
 
                     <div className="px-3 py-2 mt-2">

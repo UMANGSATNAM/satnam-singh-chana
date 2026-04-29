@@ -10,6 +10,7 @@ import { X, Minus, Plus, ShoppingBag, Tag, Truck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { getProductEmoji } from '@/lib/product-display';
 
 export default function CartSidebar() {
   const {
@@ -38,7 +39,6 @@ export default function CartSidebar() {
     if (!promoCode.trim()) return;
     setPromoLoading(true);
 
-    // Simulate promo validation
     setTimeout(() => {
       const code = promoCode.toUpperCase().trim();
       if (code === 'KALA25') {
@@ -100,7 +100,7 @@ export default function CartSidebar() {
               Looks like you haven&apos;t added any snacks yet!
             </p>
             <Button
-              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg"
               onClick={() => {
                 setCartSidebar(false);
                 setView('products');
@@ -132,9 +132,9 @@ export default function CartSidebar() {
                       exit={{ opacity: 0, x: 100 }}
                       className="flex gap-3 p-3 bg-gray-50 rounded-xl"
                     >
-                      {/* Product icon */}
+                      {/* Product emoji */}
                       <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-green-100 rounded-lg flex items-center justify-center shrink-0">
-                        <span className="text-2xl">🥜</span>
+                        <span className="text-2xl">{getProductEmoji(item.productSlug)}</span>
                       </div>
 
                       <div className="flex-1 min-w-0">
@@ -263,7 +263,7 @@ export default function CartSidebar() {
               )}
 
               <Button
-                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-11"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold h-11 rounded-lg"
                 onClick={handleCheckout}
               >
                 Proceed to Checkout — {formatPrice(total)}
